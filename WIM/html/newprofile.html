@@ -1,0 +1,483 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+  <!--script code -->
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+  <script>
+
+  var newprofileidnumver = "";
+
+  $(function(){
+
+
+
+
+         //alert("firsttesting");
+        //e.preventDefault();
+
+
+        //var mydata = {email: email, firstname: firstname, lastname: lastname, username: username, city: city, state: state, favoritepet: favoritepet, favoritepet: favoritepet, bio: bio};
+          $.ajax({
+                   url:"php/newprofile.php",
+                   type:"POST",
+                   dataType: "json",
+                   //data: mydata,
+                   //cache: false,
+                   beforeSend: function(){
+                       //alert("account created");
+                       //window.location.href = "signin.html";
+                   },
+                   success:function(result){
+                      //this whole thing is janked up!!!!!
+                      //alert(result);
+                      newprofileidnumver = result;
+                      alert(newprofileidnumver);
+
+                  }
+         }).error(function(){
+           alert("wrong");
+         });
+});
+
+
+  </script>
+
+
+
+
+
+
+    <!--pick image script -->
+
+    <script>
+    function setbackgroundimage() {
+        var variablethingy = "yep";
+        document.getElementById("bigpicturepreview").style.backgroundImage = "url('https://www.imgacademy.com/sites/default/files/images/news/photos/Football_Edited%20-%20Copy.jpg')";
+        alert(variablethingy);
+    }
+
+    </script>
+
+    <script>
+
+    //get id of small pic and make it the header pic.
+    $(document).ready(function(){
+        $(document).on("click",".WIM_createwiminputfielddivselectbackgroundimage",function(){
+            var idofclickedpic = this.id;
+            var srcofclickedpic = document.getElementById(idofclickedpic).style.backgroundImage;
+            document.getElementById("bigpicturepreview").style.backgroundImage= srcofclickedpic;
+        });
+    });
+
+
+    //set header image source url to what you have checkloginsession
+    $(document).ready(function(){
+        $(document).on("click",".WIM_createwiminputfielddivselectbackgroundimage",function(){
+            var idofclickedpic = this.id;
+            var srcofclickedpic = document.getElementById(idofclickedpic).style.backgroundImage;
+            document.getElementById("bigpicturepreview").style.backgroundImage= srcofclickedpic;
+            document.getElementById("reviewbigpicturepreview").style.backgroundImage= srcofclickedpic;
+
+        });
+    });
+
+    </script>
+
+
+
+
+
+    <!--create account to php -->
+    <script>
+
+    $(function(){
+
+        var createwimbutton =   $('#submitaccountbutton');
+
+        createwimbutton.on('click', function(e){
+           //alert("firsttesting");
+          e.preventDefault();
+
+          alert("anything");
+          var email = $("email").val();
+
+          var firstname = $("firstname").val();
+
+          var lastname = $("lastname").val();
+
+          var username = $("username").val();
+
+          var city = $("city").val();
+
+          var state = $("state").val();
+
+          var favoritecolor = $("favoritecolor").val();
+
+          var favoritepet = $("favoritepet").val();
+
+          var bio = $("bio").val();
+
+          //alert(wimname);
+
+          //invitedfriendarray = JSON.stringify(invitedfriendarray);
+
+
+
+          //console.log(invitedfriendarray);
+
+          var mydata = {email: email, firstname: firstname, lastname: lastname, username: username, city: city, state: state, favoritecolor: favoritecolor, favoritepet: favoritepet, bio: bio};
+            $.ajax({
+                     url:"php/newprofile.php",
+                     type:"POST",
+                     dataType: "json",
+                     data: mydata,
+                     //cache: false,
+                     beforeSend: function(){
+                         //alert("WIM created");
+                         //window.location.href = "homepage.html";
+                     },
+                     success:function(response){
+                        //this whole thing is janked up!!!!!
+                        //alert(response);
+                        //alert("something");
+                        alert(newprofileidnumver);
+                        window.location.href = "homepage.html";
+
+                      }
+                     })
+                 }).error(function(){alert("wrong");});
+           });
+
+
+    </script>
+
+<!--
+          //alert("testing the waters");
+/*
+          var email = document.getElementById("email").value;
+
+          var firstname = document.getElementById("firstname").value;
+
+          var lastname = document.getElementById("lastname").value;
+
+          var username = document.getElementById("username").value;
+
+          var city = document.getElementById("city").value;
+
+          var state = document.getElementById("state").value;
+
+          var favoritepet = document.getElementById("favoritecolor").value;
+
+          var favoritepet = document.getElementById("favoritepet").value;
+
+          var bio = document.getElementById("bio").value;
+
+          //alert(wimname);
+
+
+
+
+
+
+          var mydata = {email: email, firstname: firstname, lastname: lastname, username: username, city: city, state: state, favoritepet: favoritepet, favoritepet: favoritepet, bio: bio};
+            $.ajax({
+                     url:"php/newprofile.php",
+                     type:"POST",
+                     dataType: "json",
+                     data: mydata,
+                     cache: false,
+                     beforeSend: function(){
+                         alert("testing");
+                     },
+                     success:function(result){
+                       alert("got it");
+                        alert("  sss  "+result);
+                        alert(result[0]);
+                        alert(result[1]);
+
+
+                        if(isset(result)){
+                        alert(result);
+                        window.location.href = "homepage.html";
+                      }
+                      }
+                     })
+                 }).error(function(){alert("wrong");});
+           });
+
+
+
+
+    </script>
+*/
+
+-->
+
+
+
+
+
+
+</head>
+<body>
+
+
+    <div class="WIMheader">
+         <a href="signin.html" style="z-index: 100;">
+            <img class="backarrow" src="web_images/back_arrow.png">
+        </a>
+        <div class="headernameofpage">New Account</div>
+    </div>
+
+
+
+<div class="WIM_meat_slider_div" style="height: 90%;">
+
+    <div class="WIMmeat">
+
+        <div class="WIM_createwimprogressbar"></div>
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="email" class="WIM_createwiminputfieltextinput" placeholder="email" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="firstname" class="WIM_createwiminputfieltextinput" placeholder="First name" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="lastname" class="WIM_createwiminputfieltextinput" placeholder="Last name" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+    </div>
+
+
+
+    <div class="WIMmeat">
+        <div class="WIM_createwimprogressbar"></div>
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="username" class="WIM_createwiminputfieltextinput" placeholder="Username" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="city" class="WIM_createwiminputfieltextinput" placeholder="City" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="state" class="WIM_createwiminputfieltextinput" placeholder="State" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+
+    </div>
+
+    <div class="WIMmeat">
+        <div class="WIM_createwimprogressbar"></div>
+
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="favoritecolor" class="WIM_createwiminputfieltextinput" placeholder="Favorite color" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <input id="favoritepet" class="WIM_createwiminputfieltextinput" placeholder="Favorite pet" onchange="reviewwimfunction()">
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+        <div class="WIM_createwiminputfielddiv">
+            <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+            <div class="WIM_createwiminputfielline"></div>
+            <textarea rows="4" id="bio"  cols="50"class="WIM_createwiminputfieltextinputtextarea" placeholder="Bio (optional)" onchange="reviewwimfunction()"></textarea>
+            <div class="WIM_createwimbottombar"></div>
+        </div>
+
+
+    </div>
+
+
+    <div class="WIMmeat">
+        <div class="WIM_createwimprogressbar"></div>
+
+        <h1 class="WIMinfopeoplegoingheader">upload picture</h1>
+
+        <div id="picviewer" class="WIM_createwimprofilepicviewer"></div>
+
+        <!--<form id="file-form" action="handler.php" method="POST">-->
+          <input class="WIM_createwimprofilepicuploadbutton" style="height:auto;" type="file" id="file-select" name="photos[]" single/>
+          <button class="WIM_createwimprofilepicuploadbutton" type="submit" id="upload-button">Upload</button>
+
+        <!--</form>-->
+
+
+
+
+
+
+
+    </div>
+
+    <div class="WIMmeat">
+      <div id="submitaccountbutton" class="WIMcreatewimbutton">
+              <h1 class="WIMcreatewimbuttontext">Create account</h1>
+      </div>
+
+
+    </div>
+
+
+
+</div>
+
+<!--begin test-->
+
+
+
+
+
+<!--end of test-->
+
+
+
+
+<!--invite friends array -->
+<script>
+    var invitefriends = [];
+    document.getElementById("demo").innerHTML = invitefriends;
+
+    function myFunction(x) {
+        invitefriends.push(x);
+        document.getElementById("demo").innerHTML = invitefriends;
+    }
+</script>
+
+
+
+<!-- Slider script -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.WIM_meat_slider_div').slick({infinite: false});
+    });
+</script>
+
+
+<!--slider button jquery -->
+<script>
+$(document).ready(function(){
+    $("#createwim").click(function(){
+        // Manually refresh positioning of slick
+        $('.WIM_meat_slider_div').slickGoTo('2');
+    });
+
+    $("#wimfeed").click(function(){
+        // Manually refresh positioning of slick
+        $('.WIM_meat_slider_div').slickGoTo('0');
+    });
+
+    $("#friends").click(function(){
+        // Manually refresh positioning of slick
+        $('.WIM_meat_slider_div').slickGoTo('1');
+    });
+});
+</script>
+
+
+
+<!--upload picture script-->
+<script>
+
+    function myFunction() {
+        document.getElementById("picviewer").style.backgroundColor = "lightgray";
+        document.getElementById("picviewer").style.backgroundImage = "url('library_files/<?=$CurrentfileFile?>')";
+    }
+
+</script>
+
+<script>
+
+	var form = document.getElementById('file-form');
+	var fileSelect = document.getElementById('file-select');
+	var uploadButton = document.getElementById('upload-button');
+
+	uploadButton.onclick = function(event) {
+	  event.preventDefault();
+
+	  // Update button text.
+	  uploadButton.innerHTML = 'Uploading...';
+
+		// Get the selected files from the input.
+		var files = fileSelect.files;
+
+		// Create a new FormData object.
+		var formData = new FormData();
+
+		// Loop through each of the selected files.
+		for(var i = 0; i < files.length; i++) {
+		  var file = files[i];
+
+		  // Check the file type.
+		  if (!file.type.match('image.*')) {
+		    continue;
+		  }
+      var accountID = newprofileidnumver;
+		  // Add the file to the request.
+		  formData.append('photos[]', file, accountID+".jpg");
+		}
+
+		// Set up the request.
+		var xhr = new XMLHttpRequest();
+		xhr.overrideMimeType("application/json");
+		// Open the connection.
+		xhr.open('POST', 'php/fileuploadbackend.php', true);
+
+		// Set up a handler for when the request finishes.
+		xhr.onload = function () {
+		  if (xhr.status === 200) {
+		    // File(s) uploaded.
+				console.log(xhr);
+				var jsonResponse = JSON.parse(xhr.responseText);
+        console.log(newprofileidnumver);
+				console.log(jsonResponse.success);
+        document.getElementById("picviewer").style.backgroundColor = "lightgray";
+        document.getElementById("picviewer").style.backgroundImage = "url('php/files_uploaded/"+jsonResponse.success+"')";
+		    uploadButton.innerHTML = 'Upload';
+		  } else {
+		    alert('An error occurred!');
+		  }
+		};
+
+		// Send the Data.
+		xhr.send(formData);
+	};
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

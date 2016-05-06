@@ -1,0 +1,197 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+    <!--CHECK SESSION IF LOGGED IN?-->
+    <script>
+    function checkloginsession() {
+        //alert("Page is loaded");
+
+
+    //script to logout
+      $(function(){
+
+
+          var logoutbutton =   $('#logoutbutton');
+
+
+      //logout button function
+            //logoutbutton.on('click', function(e){
+               //alert("logging out function");
+              //e.preventDefault();
+
+              //var logoutvarjsonval = logoutbutton.val();
+
+
+              var mydata = {logout: "logout"};
+                $.ajax({
+                         url:"php/checksessionloggedin.php",
+                         type:"POST",
+                         dataType: "json",
+                         data: mydata,
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            $("#result").html(result);
+                            //alert(result);
+
+                            //redirect if session login is not true
+                            if (result != "true") {
+                              //alert("seriously")
+
+                              window.location.href = "signin.html";
+                            }else{
+                              //alert("session is true");
+                            }
+
+                            //if (result == "loggedin"){
+                              //alert("something wonky happened");
+                              //redirect to landing page
+                              //window.location.href = "landingpage.html";
+                            //}
+                         }
+                     }).error(function(){alert("error not logged out");});
+               //});
+
+              })
+
+
+        }
+
+    </script>
+
+<!--
+    <script>
+        function destination() {
+            document.getElementById("infodestination").style.opacity = "10";
+            document.getElementById("infopeoplegoing").style.opacity = "0";
+            document.getElementById("infovehicles").style.opacity = "0";
+            document.getElementById("WIMinfoextrainfo").style.opacity = "0";
+        }
+
+        function peoplegoing() {
+            document.getElementById("infodestination").style.opacity = "0";
+            document.getElementById("infopeoplegoing").style.opacity = "10";
+            document.getElementById("infovehicles").style.opacity = "0";
+            document.getElementById("WIMinfoextrainfo").style.opacity = "0";
+        }
+
+        function vehicles() {
+            document.getElementById("infodestination").style.opacity = "0";
+            document.getElementById("infopeoplegoing").style.opacity = "0";
+            document.getElementById("infovehicles").style.opacity = "10";
+            document.getElementById("WIMinfoextrainfo").style.opacity = "0";
+        }
+
+    </script>
+-->
+</head>
+<body onload="checkloginsession()">
+    <div class="WIMheader">
+        <a href="homepage.html">
+            <img class="backarrow" src="web_images/back_arrow.png">
+        </a>
+        <div class="headernameofpage">Coffee Time</div>
+        <div class="headerloggedinprofile">
+            <p class="headerloggedinprofilename">Steve Fuller</p>
+            <img class="headerloggedinprofileimage" src="https://lh3.googleusercontent.com/-wysvRmf4xz4/AAAAAAAAAAI/AAAAAAAAAAA/GluI72KIjv0/photo.jpg">
+        </div>
+    </div>
+
+    <div class="infovehiclespeopleinside">
+
+            <!--<div class="blacktransparentoverlay">
+            </div>-->
+
+
+
+               <div class="WIMinfodestinationextrainfo">
+                   <h1 class="WIMinfopeoplegoingheader">Stacy Simms SUV</h1>
+                        <div class="WIMinfopeopleinvehicles">
+                            <h1 style="text-align: center; font-family: Arial;">In this vehicle</h1>
+                            <div class="WIMinfopeopleinvehiclespeople">
+                            <img class="WIMinfopeopleinvehiclespeoplepic" src="http://elfnordics.com/mediabank/var/resizes/e.l.f.-Scandinavia-Staff/PROFILE-Celine-01-square.jpg">
+                            <h1 class="WIMinfopeopleinvehiclepeoplename">Stacy Simms</h1>
+                            <h2 class="WIMinfopeopleinvehiclepeopletitle">Driver</h2>
+                            </div>
+
+                            <div class="WIMinfopeopleinvehiclespeople">
+                            <img class="WIMinfopeopleinvehiclespeoplepic" src="https://media.creativemornings.com/uploads/user/avatar/49419/Bechtel_Profile_Square.jpg">
+                            <h1 class="WIMinfopeopleinvehiclepeoplename">Brian Smith</h1>
+                            </div>
+
+                            <div class="WIMinfopeopleinvehiclespeople">
+                            <img class="WIMinfopeopleinvehiclespeoplepic" src="https://pbs.twimg.com/profile_images/1973226129/Jake_Facebook_Profile_Pic_Square_400x400.png">
+                            <h1 class="WIMinfopeopleinvehiclepeoplename">Philip Warfiled</h1>
+                            </div>
+
+                            <div class="WIMinfopeopleinvehiclespeople">
+                            <img class="WIMinfopeopleinvehiclespeoplepic" src="http://static1.squarespace.com/static/52e0235ee4b06ba19ad52758/55e8db4ae4b04dd3c92fb9d6/56c63da940261d1c7471361d/1456172683038/Fay-L-Square-profile-pic.png">
+                            <h1 class="WIMinfopeopleinvehiclepeoplename">Janette May</h1>
+                            </div>
+
+                             <div class="WIMinfopeopleinvehiclespeople">
+                            <img class="WIMinfopeopleinvehiclespeoplepic" src="http://static1.squarespace.com/static/505c959284ae57cc4c2b5878/t/525f0419e4b09f9731f515cb/1381958682689/heavenmcarthur-profile-square-300px.jpg">
+                            <h1 class="WIMinfopeopleinvehiclepeoplename">Stacy Simmins</h1>
+                            </div>
+
+                        </div>
+                        <div class="WIMinfopeopleinvehiclesdividerline"></div>
+                        <div class="WIMinfodestinationinfothings">
+                            <div class="WIMinfodestinationinfothingstitle">
+                                Vehicle make
+                            </div>
+                            <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                            </div>
+                            <div class="WIMinfodestinationinfothingsactualinfo">
+                                Honda SUV thingy 2008
+                            </div>
+                       </div>
+                        <div class="WIMinfodestinationinfothings">
+                            <div class="WIMinfodestinationinfothingstitle">
+                                Pickup location
+                            </div>
+                            <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                            </div>
+                            <div class="WIMinfodestinationinfothingsactualinfo">
+                                1234 Address rd city, ST
+                            </div>
+                       </div>
+                        <div class="WIMinfodestinationinfothings">
+                           <div class="WIMinfodestinationinfothingstitle">
+                                    Pickup time
+                                </div>
+                                <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                                </div>
+                                <div class="WIMinfodestinationinfothingsactualinfo">
+                                    12:15 pm
+                                </div>
+                           </div>
+
+                   </div>
+
+
+    </div>
+
+
+
+
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.WIM_meat_slider_div').slick();
+    });
+</script>
+
+</body>
+</html>

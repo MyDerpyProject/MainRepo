@@ -1,0 +1,787 @@
+<html>
+<head>
+  <!--style code -->
+  <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="css/slick.css"/>
+  <!--script code -->
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+
+  <!-- Where our handlebar data will actually be generated -->
+
+
+
+<!-- The handlebar template -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<!--countdown jquery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<!-- previous and next arrows style-->
+    <style>
+        .slick-prev {
+            left: 10px;
+            height: 50px;
+        }
+
+        .slick-next {
+            right: 60px;
+        }
+
+    </style>
+
+<!-- script for Modale-->
+    <script type='text/javascript' src='js/jquery.js'></script>
+    <script type='text/javascript'>
+
+        $(document).ready(function(){
+
+        //get the height and width of the page
+        var window_width = $(window).width();
+        var window_height = $(window).height();
+
+        //vertical and horizontal centering of modal window(s)
+        /*we will use each function so if we have more then 1
+        modal window we center them all*/
+        $('.select_friends_window').each(function(){
+
+            //get the height and width of the modal
+            var modal_height = $(this).outerHeight();
+            var modal_width = $(this).outerWidth();
+
+            //calculate top and left offset needed for centering
+            var top = (window_height-modal_height)/2;
+            var left = (window_width-modal_width)/2;
+
+            //apply new top and left css values
+            $(this).css({'top' : top , 'left' : left});
+
+        });
+
+
+            $('.activate_modal').click(function(){
+
+                  //get the id of the modal window stored in the name of the activating element
+                  var modal_id = $(this).attr('name');
+
+                  //use the function to show it
+                  show_modal(modal_id);
+
+            });
+
+            $('.close_modal').click(function(){
+
+                //use the function to close it
+                close_modal();
+
+            });
+
+        });
+
+        //THE FUNCTIONS
+
+        function close_modal(){
+
+            //hide the mask
+            $('#mask').fadeOut(500);
+
+            //hide modal window(s)
+            $('.select_friends_window').fadeOut(500);
+
+        }
+        function show_modal(modal_id){
+
+            //set display to block and opacity to 0 so we can use fadeTo
+            $('#mask').css({ 'display' : 'block', opacity : 0});
+
+            //fade in the mask to opacity 0.8
+            $('#mask').fadeTo(500,0.8);
+
+             //show the modal window
+            $('#'+modal_id).fadeIn(500);
+
+        }
+</script>
+
+<script>
+//retrieve info for homepage wims
+  $(function(){
+
+          $.ajax({
+                   url:"php/homepagepostwims.php",
+                   type:"POST",
+                   dataType: "json",
+                   beforeSend: function(){
+                       //alert("testing");
+                   },
+                   success:function(result){
+                      $("#result").html(result);
+                      //alert("  sss  "+result);
+                      //alert(result[0]);
+                      //alert(result[1]);
+
+
+
+
+                      result.forEach(function(entry) {
+                          console.log(entry);
+                      });
+                      //var profilefavpet = result[9];
+
+                      //alert(userimagesrc);
+                      //header
+                      //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                      // The template code
+                      var templateSource = document.getElementById('results-template').innerHTML;
+
+                      // compile the template
+                      var template = Handlebars.compile(templateSource);
+
+                      // The div/container that we are going to display the results in
+                      var resultsPlaceholder = document.getElementById('invitesdiv');
+
+                      resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                      if (result[10] == "true"){
+                        //redirect to landing page
+                        //window.location.href = "homepage.html";
+                      }
+                   }
+               }).error(function(){alert("wrong");});
+         });
+
+
+
+  </script>
+
+  <script id="results-template" type="text/x-handlebars-template">
+    {{#each Invites}}
+
+    <!--<h2> Welcome:  {{creatorID}} {{wimname}}</h2>-->
+
+
+        <span id="{{whimID}}" class="WIMselectorbackgroundimage" style="background-image: {{backgroundpic}};">
+            <button class="WIMselector">
+                <img class="WIMselectorhostimage" src="php/files_uploaded/{{creatorID}}.jpg">
+                    <div class="WIMinfobottomnavborderbar" style="height">
+                    </div>
+                <div class="WIMselectorwimname">
+                    {{wimname}}
+                </div>
+                    <div class="WIMinfobottomnavborderbar">
+                    </div>
+                <div class="WIMselectornumbergoing">
+                    <p class="WIMselectornumbergoingnumerator">4</p>
+                    <p class="WIMselectornumbergoingdenominator">{{numberofparticipants}}</p>
+                    <div class="WIMselectornumbergoingline"></div>
+                </div>
+                    <div class="WIMinfobottomnavborderbar">
+                    </div>
+                <div class="WIMselectortimediv">
+                    <div class="WIMselectortimecountdown">
+                        4 hours
+                    </div>
+                    <div class="WIMselectortimeactual">
+                        Jan 3 {{starttime}}
+                    </div>
+                </div>
+
+            </button>
+        </span>
+
+    {{/each}}
+
+  </script>
+
+
+
+  <script>
+  //retrieve info for homepage wims
+    $(function(){
+
+            $.ajax({
+                     url:"php/homepagepostwimsattending.php",
+                     type:"POST",
+                     dataType: "json",
+                     beforeSend: function(){
+                         //alert("testing");
+                     },
+                     success:function(result){
+                        $("#result").html(result);
+                        //alert("  sss  "+result);
+                        //alert(result[0]);
+                        //alert(result[1]);
+
+
+
+
+                        result.forEach(function(entry) {
+                            console.log(entry);
+                        });
+                        //var profilefavpet = result[9];
+
+                        //alert(userimagesrc);
+                        //header
+                        //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                        // The template code
+                        var templateSource = document.getElementById('results-templatetwo').innerHTML;
+
+                        // compile the template
+                        var template = Handlebars.compile(templateSource);
+
+                        // The div/container that we are going to display the results in
+                        var resultsPlaceholder = document.getElementById('attendingdiv');
+
+                        resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                        if (result[10] == "true"){
+                          //redirect to landing page
+                          //window.location.href = "homepage.html";
+                        }
+                     }
+                 }).error(function(){alert("wrong");});
+           });
+
+
+
+    </script>
+
+    <script id="results-templatetwo" type="text/x-handlebars-template">
+    {{#each Invites}}
+
+    <!--<h2> Welcome:  {{creatorID}} {{wimname}}</h2>-->
+
+    <!--<button id="{{whimID}}">-->
+        <span id="{{whimID}}" class="WIMselectorbackgroundimage"  style="background-image: {{backgroundpic}};">
+            <div class="WIMselector">
+                <img class="WIMselectorhostimage" src="php/files_uploaded/{{creatorID}}.jpg">
+                    <div class="WIMinfobottomnavborderbar" style="height">
+                    </div>
+                <div class="WIMselectorwimname">
+                    {{wimname}}
+                </div>
+                    <div class="WIMinfobottomnavborderbar">
+                    </div>
+                <div class="WIMselectornumbergoing">
+                    <p class="WIMselectornumbergoingnumerator">4</p>
+                    <p class="WIMselectornumbergoingdenominator">{{numberofparticipants}}</p>
+                    <div class="WIMselectornumbergoingline"></div>
+                </div>
+                    <div class="WIMinfobottomnavborderbar">
+                    </div>
+                <div class="WIMselectortimediv">
+                    <div class="WIMselectortimecountdown">
+                        4 hours
+                    </div>
+                    <div class="WIMselectortimeactual">
+                        Jan 3 {{starttime}}
+                    </div>
+
+                </div>
+
+            </div>
+        </span>
+<!--</button>-->
+
+    {{/each}}
+
+    </script>
+
+
+
+    <script>
+    //retrieve freinds divs
+      $(function(){
+
+              $.ajax({
+                       url:"php/homepagepostfriends.php",
+                       type:"POST",
+                       dataType: "json",
+                       beforeSend: function(){
+                           //alert("testing");
+                       },
+                       success:function(result){
+                          $("#result").html(result);
+                          //alert("  sss  "+result);
+                          //alert(result[0]);
+                          //alert(result[1]);
+
+
+
+
+                          result.forEach(function(entry) {
+                              console.log(entry);
+                          });
+                          //var profilefavpet = result[9];
+
+                          //alert(userimagesrc);
+                          //header
+                          //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                          // The template code
+                          var templateSource = document.getElementById('results-templatethree').innerHTML;
+
+                          // compile the template
+                          var template = Handlebars.compile(templateSource);
+
+                          // The div/container that we are going to display the results in
+                          var resultsPlaceholder = document.getElementById('generatefriendsgdiv');
+
+                          resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                          if (result[10] == "true"){
+                            //redirect to landing page
+                            //window.location.href = "homepage.html";
+                          }
+                       }
+                   }).error(function(){alert("wrong");});
+             });
+
+
+
+      </script>
+
+      <script id="results-templatethree" type="text/x-handlebars-template">
+      {{#each Invites}}
+
+      <!--<h2> Welcome:  {{creatorID}} {{wimname}}</h2>-->
+          <!--<a href="profile.html">-->
+
+            <button id="{{userID}}">
+              <button id="{{userID}}"class="WIMinfopeoplegoingpersondiv">
+                  <img class="WIMinfopeoplegoingpersonpic" src="php/files_uploaded/{{userID}}.jpg">
+                  <h1 class="WIMinfopeoplegoingpersonname">{{username}}</h1>
+                  <h2 class="WIMinfopeoplegoingpersonusername">{{first}} {{last}}</h2>
+              </button>
+            </button>
+          <!--</a>-->
+      {{/each}}
+      </script>
+
+
+
+  <!--CHECK SESSION IF LOGGED IN?-->
+  <script>
+  function checkloginsession() {
+      //alert("Page is loaded");
+
+
+  //script to logout
+    $(function(){
+
+
+        var logoutbutton =   $('#logoutbutton');
+
+
+    //logout button function
+          //logoutbutton.on('click', function(e){
+             //alert("logging out function");
+            //e.preventDefault();
+
+            //var logoutvarjsonval = logoutbutton.val();
+
+
+            var mydata = {logout: "logout"};
+              $.ajax({
+                       url:"php/checksessionloggedin.php",
+                       type:"POST",
+                       dataType: "json",
+                       data: mydata,
+                       beforeSend: function(){
+                           //alert("testing");
+                       },
+                       success:function(result){
+                          $("#result").html(result);
+                          //alert(result);
+
+                          //redirect if session login is not true
+                          if (result != "true") {
+                            //alert("seriously")
+
+                            window.location.href = "signin.html";
+                          }else{
+                            //alert("session is true");
+                          }
+
+                          //if (result == "loggedin"){
+                            //alert("something wonky happened");
+                            //redirect to landing page
+                            //window.location.href = "landingpage.html";
+                          //}
+                       }
+                   }).error(function(){alert("error not logged out");});
+             //});
+
+            })
+
+
+      }
+
+  </script>
+*/
+
+  <script>
+//script to logout
+  $(function(){
+
+
+      var logoutbutton =   $('#logoutbutton');
+
+
+  //logout button function
+        logoutbutton.on('click', function(e){
+           //alert("logging out function");
+          e.preventDefault();
+
+          //var logoutvarjsonval = logoutbutton.val();
+
+
+          var mydata = {logout: "logout"};
+            $.ajax({
+                     url:"php/logout.php",
+                     type:"POST",
+                     dataType: "json",
+                     data: mydata,
+                     beforeSend: function(){
+                         //alert("testing");
+                     },
+                     success:function(result){
+                        $("#result").html(result);
+                        //alert(result);
+                        //alert("second one");
+
+                        window.location.href = "signin.html";
+                        //if (result == "loggedin"){
+                          //alert("something wonky happened");
+                          //redirect to landing page
+                          //window.location.href = "landingpage.html";
+                        //}
+                     }
+                 }).error(function(){alert("error not logged out");});
+           });
+
+          })
+
+  </script>
+
+<!--set session variable for friend array-->
+  <script>
+
+
+
+
+
+
+  </script>
+
+  <!--create account to php -->
+  <script>
+
+  $(function(){
+
+    $(document).on('click', 'button', function () {
+      //alert(this.id);
+
+        var thisid = this.id;
+        var thiscolor = document.getElementById(this.id).style.color;
+        console.log(thisid);
+        alert(thiscolor);
+
+
+
+          var mydata = {selecteddivID: thisid};
+            $.ajax({
+                     url:"php/setclickedIDsessionvar.php",
+                     type:"POST",
+                     dataType: "json",
+                     data: mydata,
+                     //cache: false,
+                     beforeSend: function(){
+                       //alert(thisid);
+                       //alert("wahti inki");
+                       console.log("ok!");
+                       window.location.href = "profile.html";
+                     },
+                     success:function(result){
+                        //this whole thing is janked up!!!!!
+
+                        //alert("WIM created");
+
+
+                      }
+                     })
+                 }).error(function(){alert("wrong");});
+
+         });
+
+
+  </script>
+
+
+
+  <!--create account to php -->
+  <script>
+
+  $(function(){
+
+    $(document).on('click', 'span', function () {
+      //alert(this.id);
+
+        var thisid = this.id;
+
+        console.log(thisid);
+
+        var className = $('#'+thisid).attr('class');
+
+
+
+          var mydata = {selecteddivID: thisid};
+            $.ajax({
+                     url:"php/setclickedIDsessionvar.php",
+                     type:"POST",
+                     dataType: "json",
+                     data: mydata,
+                     //cache: false,
+                     beforeSend: function(){
+                       //alert(thisid);
+                       //alert("wahti inki");
+                       console.log("ok!");
+                       window.location.href = "profile.html";
+
+                       //differenciates between wims and profiles by using the classname of the wim span
+                       if (className == "WIMselectorbackgroundimage"){
+                       //alert(className);
+
+                       window.location.href = "wiminfo.html";
+                       //alert(thisid);
+                     }
+                     },
+                     success:function(response){
+                        //this whole thing is janked up!!!!!
+
+                        alert("WIM created");
+
+
+                      }
+                     })
+                 }).error(function(){alert("wrong");});
+
+         });
+
+
+  </script>
+<script>
+  $(document).ready(function(){
+
+  //get the height and width of the page
+  var window_width = $(window).width();
+  var window_height = $(window).height();
+
+  //vertical and horizontal centering of modal window(s)
+  /*we will use each function so if we have more then 1
+  modal window we center them all*/
+  $('.select_friends_window').each(function(){
+
+      //get the height and width of the modal
+      var modal_height = $(this).outerHeight();
+      var modal_width = $(this).outerWidth();
+
+      //calculate top and left offset needed for centering
+      //var top = (window_height-modal_height)/6;
+      var top = 125;
+      var left = (window_width-modal_width)/2;
+
+      //apply new top and left css values
+      $(this).css({'top' : top , 'left' : left});
+
+  });
+});
+
+</script>
+<!--modal html if you ever need it-->
+<!--<p><a class='activate_modal' name='select_friends_window' href='#'>First modal window.</a></p>-->
+
+
+</head>
+<body onload="checkloginsession()" style="width: 100%; height: 100%; overflow: hidden; background-color: #FFFFFF;">
+
+
+
+    <div id='mask' class='close_modal' style="z-index: 100"></div>
+    <div id='select_friends_window' class='select_friends_window' style="z-index: 100">This is the first modal window </div>
+    <div class="WIMheader">
+            <div class="WIM_meat_slider_div" style="position: absolute; width: 45%; margin-left: 27.5%; height: 100px; text-align: center; font-size: 70px; line-height: 100px; font-family: Arial Black; color: white; float: left; margin-top: 0px;">
+          <div>WIM Feed</div>
+          <div>My Friends</div>
+          <div>Create WIM</div>
+
+
+          </div>
+
+
+              <div class="headerloggedinprofile">
+                  <img id="logoutbutton" src="web_images/login.png" style="height: 70; margin: 15px; margin-right: 10px;">
+              </div>
+    </div>
+
+
+    <div id="mydiv" style="background-color: #FFFFFF; width: 100%; margin-top: 75px;">
+       <div class="your-class">
+            <div style="background-color: #FFFFFF; overflow-y: auto;">
+                        <div class="WIMselectorholderdiv">
+                      <div class="WIMhomeswimtatusbar">
+                          Invitations
+                      </div>
+                  </div>
+                  <div class="WIMselectorbottomline" style="width:100%; margin:0;">
+                  </div>
+                  <div class="WIMselectorholderdiv">
+                      <div class="WIMselectorcategoryexplain">
+                          <div class="WIMselectorcategoryexplainineach" style="width:16%;">
+                              Host
+                          </div>
+                          <div class="WIMselectorcategoryexplainineach" style="width:43.5%;">
+                              WIM name
+                          </div>
+                          <div class="WIMselectorcategoryexplainineach" style="width:15%;">
+                              Going/Invited
+                          </div>
+                          <div class="WIMselectorcategoryexplainineach" style="width:16%;">
+                              Time
+                          </div>
+
+                      </div>
+                      </div>
+                      <div class="WIMselectorbottomline" style="width:100%; margin:0;">
+                      </div>
+
+                  <!-- prints out results of invitations query-->
+                  <div id="invitesdiv"></div>
+
+              <!--attending-->
+
+              <div class="WIMselectorholderdiv">
+                  <div class="WIMhomeswimtatusbar">
+                      Attending
+                  </div>
+              </div>
+                  <!--div for generating attending-->
+                   <div id="attendingdiv"></div>
+
+                  <div class="WIMselectorbottomline">
+                  </div>
+
+
+            </div>
+            <div style="background-color: #FFFFFF; overflow-y: auto;">
+                  <h1 class="WIMinfopeoplegoingheader">My friends</h1>
+
+                  <!--div for generating attending-->
+                   <div id="generatefriendsgdiv"></div>
+
+
+                    <div class="WIMinfopeoplegoingpersondiv">
+                        <a href="findfriends.html">
+                            <div class="WIMinfopeoplegoingpersonpic" style="padding: 35px; height: 85px; width: 85px;"><img src="web_images/plus_icon.png" style="width:80px; height:80px;"></div>
+                        </a>
+                        <a href="findfriends.html">
+                            <h1 class="WIMinfopeoplegoingpersonname">Find friends</h1>
+                        </a>
+                    </div>
+            </div>
+            <div style="background-color: #FFFFFF; overflow-y: auto;">
+              <a href="newwim.html">
+                  <div class="WIMcreatewimbutton">
+                          <img class="WIMinfobottomnavicon" src="web_images/plus_icon.png" style="height: 30px; margin-top: 7%; margin-left: 17%; position: absolute;">
+                          <h1 class="WIMcreatewimbuttontext">New wim</h1>
+                  </div>
+              </a>
+
+            </div>
+       </div>
+    </div>
+
+
+
+
+
+    <div class="WIMinfobottomnav">
+        <div class="WIMinfobottomnavbuttons" onclick="destination()" >
+            <img class="WIMinfobottomnavicon" src="web_images/friends.png" style="height:140; margin-top: -10; margin-left: 26%;">
+        </div>
+            <div class="WIMinfobottomnavborderbar">
+            </div>
+        <div class="WIMinfobottomnavbuttons" onclick="peoplegoing()" >
+            <img class="WIMinfobottomnavicon" src="web_images/destination.png">
+        </div>
+            <div class="WIMinfobottomnavborderbar">
+            </div>
+        <div class="WIMinfobottomnavbuttons" onclick="vehicles()" >
+            <img class="WIMinfobottomnavicon" src="web_images/car-2.png" style="height:140; margin-top: -10; margin-left: 28%;">
+        </div>
+
+
+    </div>
+
+  <!-- Slider script -->
+
+
+
+  <!--slider button jquery -->
+  <script>
+  $(document).ready(function(){
+      $("#createwim").click(function(){
+          // Manually refresh positioning of slick
+          $('.WIM_meat_slider_div').slickGoTo('2');
+      });
+
+      $("#wimfeed").click(function(){
+          // Manually refresh positioning of slick
+          $('.WIM_meat_slider_div').slickGoTo('0');
+      });
+
+      $("#friends").click(function(){
+          // Manually refresh positioning
+          $('.WIM_meat_slider_div').slickGoTo('1');
+
+        });
+    });
+
+  </script>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.your-class').slick();
+
+
+        });
+    </script>
+
+
+    <script>
+        $('#mydiv').height( $(window).height() - 210 );
+        //alert($(window).height() - 220 );
+    </script>
+
+
+
+
+</body>
+</html>

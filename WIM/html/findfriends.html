@@ -1,0 +1,219 @@
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+    <!-- The handlebar template -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+    <!--CHECK SESSION IF LOGGED IN?-->
+    <script>
+    function checkloginsession() {
+        //alert("Page is loaded");
+
+
+    //script to logout
+      $(function(){
+
+
+          var logoutbutton =   $('#logoutbutton');
+
+
+      //logout button function
+            //logoutbutton.on('click', function(e){
+               //alert("logging out function");
+              //e.preventDefault();
+
+              //var logoutvarjsonval = logoutbutton.val();
+
+
+              var mydata = {logout: "logout"};
+                $.ajax({
+                         url:"php/checksessionloggedin.php",
+                         type:"POST",
+                         dataType: "json",
+                         data: mydata,
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            $("#result").html(result);
+                            //alert(result);
+
+                            //redirect if session login is not true
+                            if (result != "true") {
+                              //alert("seriously")
+
+                              window.location.href = "signin.html";
+                            }else{
+                              //alert("session is true");
+                            }
+
+                            //if (result == "loggedin"){
+                              //alert("something wonky happened");
+                              //redirect to landing page
+                              //window.location.href = "landingpage.html";
+                            //}
+                         }
+                     }).error(function(){alert("error not logged out");});
+               //});
+
+              })
+
+
+        }
+
+    </script>
+
+
+    <script>
+    $(function(){
+
+        var submitwimbutton =   $('#searchbox');
+
+        submitwimbutton.change(function(e){
+           //alert("firsttesting");
+          e.preventDefault();
+        //retrieve freinds divs
+        var searchquery = $( "#searchbox" ).val();
+        //alert(searchquery);
+
+                var mydata = {searchrequest: searchquery};
+                  $.ajax({
+                           url:"php/findfriends.php",
+                           type:"POST",
+                           dataType: "json",
+                           data: mydata,
+                           beforeSend: function(){
+                               //alert("testing");
+                           },
+                           success:function(result){
+                              $("#result").html(result);
+                              //alert("  sss  "+result);
+                              //alert(result[0]);
+                              //alert(result[1]);
+
+
+
+
+                              result.forEach(function(entry) {
+                                  console.log(entry);
+                              });
+                              //var profilefavpet = result[9];
+
+                              //alert(userimagesrc);
+                              //header
+                              //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                              // The template code
+                              var templateSource = document.getElementById('results-templatethree').innerHTML;
+
+                              // compile the template
+                              var template = Handlebars.compile(templateSource);
+
+                              // The div/container that we are going to display the results in
+                              var resultsPlaceholder = document.getElementById('generatefriendsgdiv');
+
+                              resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                              if (result[10] == "true"){
+                                //redirect to landing page
+                                //window.location.href = "homepage.html";
+                              }
+                           }
+                       }).error(function(){alert("wrong");});
+                 });
+               });
+
+
+      </script>
+
+
+
+      <script id="results-templatethree" type="text/x-handlebars-template">
+      {{#each Invites}}
+
+      <!--<h2> Welcome:  {{creatorID}} {{wimname}}</h2>-->
+          <!--<a href="profile.html">-->
+              <div class="notificationsfriend">
+                  <img class="notificationsfriendpicture" src="php/files_uploaded/{{userID}}.jpg">
+                  <h1 class="notificationsfriendname">{{first}} {{last}}</h1>
+
+                  <div id="{{userID}}" class="notificationsanswer">Add friend</div>
+                  <h2 class="notificationscity">{{city}}, {{state}}</h2>
+                  <div class="notificationbottombar"></div>
+              </div>
+
+
+          <!--</a>-->
+      {{/each}}
+      </script>
+
+
+      <script type="text/javascript">
+
+          $(document).ready(function(){
+              $(document).on("click",".notificationsanswer",function(){
+                  var userID = this.id;
+                  alert(userID);
+
+                  var mydata = {friendID: userID};
+                    $.ajax({
+                             url:"php/addfriend.php",
+                             type:"POST",
+                             dataType: "json",
+                             data: mydata,
+                             beforeSend: function(){
+                                 alert("testing");
+                             },
+                             success:function(result){
+                                //$("#result").html(result);
+                                alert("  sss  ");
+                                //alert(result[0]);
+                                //alert(result[1]);
+                             }
+                         }).error(function(){alert("wrong");});
+
+
+                });
+
+
+            });
+
+      </script>
+
+
+
+</head>
+<body onload="checkloginsession()">
+    <div class="WIMheader">
+         <a href="homepage.html" style="z-index: 100;">
+            <img class="backarrow" src="web_images/back_arrow.png">
+        </a>
+        <div class="headernameofpage">Find friends</div>
+        <div class="headerloggedinprofile">
+            <p class="headerloggedinprofilename">Steve Fuller</p>
+            <img class="headerloggedinprofileimage" src="https://lh3.googleusercontent.com/-wysvRmf4xz4/AAAAAAAAAAI/AAAAAAAAAAA/GluI72KIjv0/photo.jpg">
+        </div>
+    </div>
+
+    <div class="WIM_meat_slider_div" style="height: auto">
+        <div class="findfriendssearchbar">
+            <img class="findfriendssearchbaricon" src="web_images/Magnifying_Glass-512.png">
+            <input id="searchbox" type="text" class="findfriendssearchbartextfield" placeholder="Search for friends">
+
+        </div>
+
+
+    </div>
+
+    <!--div for generating attending-->
+     <div id="generatefriendsgdiv"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+    <!--CHECK SESSION IF LOGGED IN?-->
+    <script>
+    function checkloginsession() {
+        //alert("Page is loaded");
+
+
+    //script to logout
+      $(function(){
+
+
+          var logoutbutton =   $('#logoutbutton');
+
+
+      //logout button function
+            //logoutbutton.on('click', function(e){
+               //alert("logging out function");
+              //e.preventDefault();
+
+              //var logoutvarjsonval = logoutbutton.val();
+
+
+              var mydata = {logout: "logout"};
+                $.ajax({
+                         url:"php/checksessionloggedin.php",
+                         type:"POST",
+                         dataType: "json",
+                         data: mydata,
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            $("#result").html(result);
+                            //alert(result);
+
+                            //redirect if session login is not true
+                            if (result != "true") {
+                              //alert("seriously")
+
+                              window.location.href = "signin.html";
+                            }else{
+                              //alert("session is true");
+                            }
+
+                            //if (result == "loggedin"){
+                              //alert("something wonky happened");
+                              //redirect to landing page
+                              //window.location.href = "landingpage.html";
+                            //}
+                         }
+                     }).error(function(){alert("error not logged out");});
+               //});
+
+              })
+
+
+        }
+
+    </script>
+</head>
+<body onload="checkloginsession()">
+
+    <div class="WIMheader">
+         <a href="homepage.html" style="z-index: 100;">
+            <img class="backarrow" src="web_images/back_arrow.png">
+        </a>
+        <div class="headernameofpage">Notifications</div>
+        <div class="headerloggedinprofile">
+            <p class="headerloggedinprofilename">Steve Fuller</p>
+            <img class="headerloggedinprofileimage" src="https://lh3.googleusercontent.com/-wysvRmf4xz4/AAAAAAAAAAI/AAAAAAAAAAA/GluI72KIjv0/photo.jpg">
+        </div>
+    </div>
+
+    <div class="WIM_meat_slider_div" style="height: auto">
+        <div class="notificationsfriend">
+            <img class="notificationsfriendpicture" src="http://berkeleyabc.org/2013/images/sonnyvu.jpg">
+            <h1 class="notificationsfriendname">Jim Mancam</h1>
+
+            <div class="notificationsanswer">Accept</div>
+            <div class="notificationsanswer">Decline</div>
+            <h2 class="notificationscity">Paris, France</h2>
+            <div class="notificationbottombar"></div>
+        </div>
+    </div>
+
+
+</body>
+</html>

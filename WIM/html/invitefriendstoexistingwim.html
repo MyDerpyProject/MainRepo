@@ -1,0 +1,257 @@
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+    <!-- The handlebar template -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+
+
+    <!--CHECK SESSION IF LOGGED IN?-->
+    <script>
+    function checkloginsession() {
+        //alert("Page is loaded");
+
+
+    //script to logout
+      $(function(){
+
+
+          var logoutbutton =   $('#logoutbutton');
+
+
+      //logout button function
+            //logoutbutton.on('click', function(e){
+               //alert("logging out function");
+              //e.preventDefault();
+
+              //var logoutvarjsonval = logoutbutton.val();
+
+
+              var mydata = {logout: "logout"};
+                $.ajax({
+                         url:"php/checksessionloggedin.php",
+                         type:"POST",
+                         dataType: "json",
+                         data: mydata,
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            $("#result").html(result);
+                            //alert(result);
+
+                            //redirect if session login is not true
+                            if (result != "true") {
+                              //alert("seriously")
+
+                              window.location.href = "signin.html";
+                            }else{
+                              //alert("session is true");
+                            }
+
+                            //if (result == "loggedin"){
+                              //alert("something wonky happened");
+                              //redirect to landing page
+                              //window.location.href = "landingpage.html";
+                            //}
+                         }
+                     }).error(function(){alert("error not logged out");});
+               //});
+
+              })
+
+
+        }
+
+    </script>
+
+    <!-- selected friends array -->
+
+    <script type="text/javascript">
+        var invitedfriendarray = [];
+        $(document).ready(function(){
+            $(document).on("click",".WIMinfopeoplegoingpersondiv",function(){
+                var userID = this.id;
+
+                var backgroundcolorvar = document.getElementById(userID).style.backgroundColor;
+                if(backgroundcolorvar != "red") {
+                    document.getElementById(userID).style.backgroundColor = "red";
+                    invitedfriendarray.push(userID);
+                    invitedfriendarray.toString();
+                    document.getElementById("invitedfriendarrayplaceholderdiv").innerHTML = invitedfriendarray;
+                  }else{
+                    //alert("elseify");
+                    document.getElementById(userID).style.backgroundColor = "";
+
+
+                  //alert(JSON.stringify(invitedfriendarray));
+                  // Find and remove item from an array
+                  var i = invitedfriendarray.indexOf(userID);
+                  if(i != -1) {
+                    invitedfriendarray.splice(i, 1);
+                  }
+
+                  //alert(JSON.stringify(invitedfriendarray));
+                  document.getElementById("invitedfriendarrayplaceholderdiv").innerHTML = invitedfriendarray;
+
+                  }
+
+              });
+          });
+
+    </script>
+
+
+    <script>
+    //retrieve freinds divs
+      $(function(){
+
+              $.ajax({
+                       url:"php/homepagepostfriends.php",
+                       type:"POST",
+                       dataType: "json",
+                       beforeSend: function(){
+                           //alert("testing");
+                       },
+                       success:function(result){
+                          $("#result").html(result);
+                          //alert("  sss  "+result);
+                          //alert(result[0]);
+                          //alert(result[1]);
+
+
+
+
+                          result.forEach(function(entry) {
+                              console.log(entry);
+                          });
+                          //var profilefavpet = result[9];
+
+                          //alert(userimagesrc);
+                          //header
+                          //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                          // The template code
+                          var templateSource = document.getElementById('results-templatethree').innerHTML;
+
+                          // compile the template
+                          var template = Handlebars.compile(templateSource);
+
+                          // The div/container that we are going to display the results in
+                          var resultsPlaceholder = document.getElementById('generatefriendsgdiv');
+
+                          resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                          if (result[10] == "true"){
+                            //redirect to landing page
+                            //window.location.href = "homepage.html";
+                          }
+                       }
+                   }).error(function(){alert("wrong");});
+             });
+
+
+
+      </script>
+
+      <script id="results-templatethree" type="text/x-handlebars-template">
+      {{#each Invites}}
+
+              <div id="{{userID}}" class="WIMinfopeoplegoingpersondiv">
+                  <img class="WIMinfopeoplegoingpersonpic" src="php/files_uploaded/{{userID}}.jpg">
+                  <h1 class="WIMinfopeoplegoingpersonname">{{username}}</h1>
+                  <h2 class="WIMinfopeoplegoingpersonusername">{{first}} {{last}}</h2>
+              </div>
+          <!--</a>-->
+      {{/each}}
+      </script>
+
+
+      <!--submit wim to php -->
+      <script>
+
+      $(function(){
+
+          var submitwimbutton =   $('#submitwimbutton');
+
+          submitwimbutton.on('click', function(e){
+             //alert("firsttesting");
+            e.preventDefault();
+
+
+            invitedfriendarray = JSON.stringify(invitedfriendarray);
+
+
+
+    console.log(invitedfriendarray);
+
+            var mydata = {invitefriends: invitedfriendarray};
+              $.ajax({
+                       url:"php/invitefriendtoalreadymadewim.php",
+                       type:"POST",
+                       dataType: "json",
+                       data: mydata,
+                       //cache: false,
+                       beforeSend: function(){
+                         //alert("ok!");
+                        // alert(backgroundimage);
+                       },
+                       success:function(response){
+                          //this whole thing is janked up!!!!!
+                          alert("Invitations sent");
+
+                          //window.location.href = "homepage.html";
+
+
+                          window.location.href = "wiminfo.html";
+
+                        }
+                       })
+                   }).error(function(){alert("wrong");});
+
+
+             invitedfriendarray = JSON.parse(invitedfriendarray);
+             });
+
+
+      </script>
+
+
+
+</head>
+<body onload="checkloginsession()">
+    <div class="WIMheader">
+         <a href="homepage.html" style="z-index: 100;">
+            <img class="backarrow" src="web_images/back_arrow.png">
+        </a>
+        <div class="headernameofpage">Invite Friends</div>
+        <div class="headerloggedinprofile">
+        </div>
+    </div>
+<!--
+    <div class="WIM_meat_slider_div" style="height: auto">
+        <div class="findfriendssearchbar">
+            <img class="findfriendssearchbaricon" src="web_images/Magnifying_Glass-512.png">
+            <input type="text" class="findfriendssearchbartextfield" placeholder="Search for friends">
+
+        </div>
+-->
+        <div style="height: 75px; width: 100%;"></div>
+        <div id="generatefriendsgdiv"></div>
+        <h1 id="invitedfriendarrayplaceholderdiv" class="WIM_createwimreviewfriendsdivindividualpeopledivname">participant id numbers</h1>
+
+        <div id="submitwimbutton" class="WIMcreatewimbutton">
+                <h1 class="WIMcreatewimbuttontext">submit WIM</h1>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,873 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+  <!--script code -->
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+  <!-- slider links-->
+  <link rel="stylesheet" type="text/css" href="css/slick.css"/>
+
+
+
+  <!--CHECK SESSION IF LOGGED IN?-->
+  <script>
+  function checkloginsession() {
+      //alert("Page is loaded");
+
+
+  //script to logout
+    $(function(){
+
+
+        var logoutbutton =   $('#logoutbutton');
+
+
+    //logout button function
+          //logoutbutton.on('click', function(e){
+             //alert("logging out function");
+            //e.preventDefault();
+
+            //var logoutvarjsonval = logoutbutton.val();
+
+
+            var mydata = {logout: "logout"};
+              $.ajax({
+                       url:"php/checksessionloggedin.php",
+                       type:"POST",
+                       dataType: "json",
+                       data: mydata,
+                       beforeSend: function(){
+                           //alert("testing");
+                       },
+                       success:function(result){
+                          $("#result").html(result);
+                          //alert(result);
+
+                          //redirect if session login is not true
+                          if (result != "true") {
+                            //alert("seriously")
+
+                            window.location.href = "signin.html";
+                          }else{
+                            //alert("session is true");
+                          }
+
+                          //if (result == "loggedin"){
+                            //alert("something wonky happened");
+                            //redirect to landing page
+                            //window.location.href = "landingpage.html";
+                          //}
+                       }
+                   }).error(function(){alert("error not logged out");});
+             //});
+
+            })
+
+
+      }
+
+  </script>
+
+
+    <!--pull data script -->
+
+    <script>
+        function reviewwimfunction() {
+            var wimname = document.getElementById("wimname").value;
+                document.getElementById('wimnametext').innerHTML = wimname;
+            var destination = document.getElementById("destination").value;
+                document.getElementById("destintiontext").innerHTML = destination;
+            var address = document.getElementById("address").value;
+                document.getElementById("addresstext").innerHTML = address;
+            var attire = document.getElementById("attire").value;
+                document.getElementById("attiretext").innerHTML = attire;
+            var description = document.getElementById("description").value;
+                document.getElementById("descriptiontext").innerHTML = description;
+            var miscinfo = document.getElementById("miscinfo").value;
+                document.getElementById("miscinfotext").innerHTML = miscinfo;
+        }
+
+    </script>
+
+    <!-- selected friends array -->
+
+    <script type="text/javascript">
+        var invitedfriendarray = [];
+        $(document).ready(function(){
+            $(document).on("click",".WIMinfopeoplegoingpersondiv",function(){
+                var userID = this.id;
+
+                var backgroundcolorvar = document.getElementById(userID).style.backgroundColor;
+                if(backgroundcolorvar != "lightblue") {
+                    document.getElementById(userID).style.backgroundColor = "lightblue";
+                    invitedfriendarray.push(userID);
+                    invitedfriendarray.toString();
+                    //document.getElementById("invitedfriendarrayplaceholderdiv").innerHTML = invitedfriendarray;
+                  }else{
+                    //alert("elseify");
+                    document.getElementById(userID).style.backgroundColor = "";
+
+
+                  //alert(JSON.stringify(invitedfriendarray));
+                  // Find and remove item from an array
+                  var i = invitedfriendarray.indexOf(userID);
+                  if(i != -1) {
+                  	invitedfriendarray.splice(i, 1);
+                  }
+
+                  //alert(JSON.stringify(invitedfriendarray));
+                  //document.getElementById("invitedfriendarrayplaceholderdiv").innerHTML = invitedfriendarray;
+
+                  }
+
+              });
+          });
+
+    </script>
+
+    <!--pick image script -->
+
+    <script>
+    function setbackgroundimage() {
+        var variablethingy = "yep";
+        document.getElementById("bigpicturepreview").style.backgroundImage = "url('https://www.imgacademy.com/sites/default/files/images/news/photos/Football_Edited%20-%20Copy.jpg')";
+        alert(variablethingy);
+    }
+
+    </script>
+
+    <script>
+
+    //get id of small pic and make it the header pic.
+    $(document).ready(function(){
+        $(document).on("click",".WIM_createwiminputfielddivselectbackgroundimage",function(){
+            var idofclickedpic = this.id;
+            var srcofclickedpic = document.getElementById(idofclickedpic).style.backgroundImage;
+            document.getElementById("bigpicturepreview").style.backgroundImage= srcofclickedpic;
+            //alert(srcofclickedpic);
+        });
+    });
+
+
+    //set header image source url to what you have checkloginsession
+    $(document).ready(function(){
+        $(document).on("click",".WIM_createwiminputfielddivselectbackgroundimage",function(){
+            var idofclickedpic = this.id;
+            var srcofclickedpic = document.getElementById(idofclickedpic).style.backgroundImage;
+            document.getElementById("bigpicturepreview").style.backgroundImage= srcofclickedpic;
+            document.getElementById("reviewbigpicturepreview").style.backgroundImage= srcofclickedpic;
+
+        });
+    });
+
+    </script>
+
+    <!--invite friends array -->
+
+
+
+    <!--submit wim to php -->
+    <script>
+
+    $(function(){
+
+        var submitwimbutton =   $('#submitwimbutton');
+
+        submitwimbutton.on('click', function(e){
+           //alert("firsttesting");
+          e.preventDefault();
+
+
+
+          var wimname = $("#wimname").val();
+
+          var destination = $("#destination").val();
+
+          var address = $("#address").val();
+
+          var attire = $("#attire").val();
+
+          var description = $("#description").val();
+
+          var miscinfo = $("#miscinfo").val();
+
+          var backgroundimage = $("#bigpicturepreview").css('background-image');
+
+          //alert(wimname);
+
+          invitedfriendarray = JSON.stringify(invitedfriendarray);
+
+
+
+console.log(invitedfriendarray);
+
+          var mydata = {wimname: wimname, destination: destination, address: address, attire: attire, description: description, miscinfo: miscinfo, invitefriends: invitedfriendarray, backgroundimage: backgroundimage};
+            $.ajax({
+                     url:"php/newWIM.php",
+                     type:"POST",
+                     dataType: "json",
+                     data: mydata,
+                     //cache: false,
+                     beforeSend: function(){
+                       //alert("ok!");
+                      // alert(backgroundimage);
+                     },
+                     success:function(response){
+                        //this whole thing is janked up!!!!!
+                        alert("WIM created");
+
+                        //window.location.href = "homepage.html";
+
+
+                        window.location.href = "homepage.html";
+
+                      }
+                     })
+                 }).error(function(){alert("wrong");});
+           });
+
+
+    </script>
+
+    <script>
+    //retrieve freinds divs
+      $(function(){
+
+              $.ajax({
+                       url:"php/homepagepostfriends.php",
+                       type:"POST",
+                       dataType: "json",
+                       beforeSend: function(){
+                           //alert("testing");
+                       },
+                       success:function(result){
+                          $("#result").html(result);
+                          //alert("  sss  "+result);
+                          //alert(result[0]);
+                          //alert(result[1]);
+
+
+
+
+                          result.forEach(function(entry) {
+                              console.log(entry);
+                          });
+                          //var profilefavpet = result[9];
+
+                          //alert(userimagesrc);
+                          //header
+                          //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                          // The template code
+                          var templateSource = document.getElementById('results-templatethree').innerHTML;
+
+                          // compile the template
+                          var template = Handlebars.compile(templateSource);
+
+                          // The div/container that we are going to display the results in
+                          var resultsPlaceholder = document.getElementById('generatefriendsgdiv');
+
+                          resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                          if (result[10] == "true"){
+                            //redirect to landing page
+                            //window.location.href = "homepage.html";
+                          }
+                       }
+                   }).error(function(){alert("wrong");});
+             });
+
+
+
+      </script>
+
+      <script id="results-templatethree" type="text/x-handlebars-template">
+      {{#each Invites}}
+
+              <div id="{{userID}}" class="WIMinfopeoplegoingpersondiv">
+                  <img class="WIMinfopeoplegoingpersonpic" src="php/files_uploaded/{{userID}}.jpg">
+                  <h1 class="WIMinfopeoplegoingpersonname">{{username}}</h1>
+                  <h2 class="WIMinfopeoplegoingpersonusername">{{first}} {{last}}</h2>
+              </div>
+          <!--</a>-->
+      {{/each}}
+      </script>
+
+
+
+        <script type="text/javascript">
+            var invitedfriendarray = [];
+            $(document).ready(function(){
+                $(document).on("click",".WIMinfopeoplegoingpersondiv",function(){
+                    //alert("spoon");
+
+                    $(function(){
+
+
+                      invitedfriendarray = JSON.stringify(invitedfriendarray);
+
+
+
+
+                      console.log(invitedfriendarray);
+
+                      var mydata = {invitefriends: invitedfriendarray};
+
+
+
+
+                            $.ajax({
+                                     url:"php/newWIMparticipantsinvited.php",
+                                     type:"POST",
+                                     dataType: "json",
+                                     data: mydata,
+                                     beforeSend: function(){
+                                         //alert("testing");
+                                     },
+                                     success:function(result){
+                                        $("#result").html(result);
+                                        //alert("  sss  "+result);
+                                        //alert(result[0]);
+                                        //alert(result[1]);
+
+
+
+
+                                        result.forEach(function(entry) {
+                                            console.log(entry);
+                                        });
+                                        //var profilefavpet = result[9];
+
+                                        //alert(userimagesrc);
+                                        //header
+                                        //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                                        // The template code
+                                        var templateSource = document.getElementById('results-templatefour').innerHTML;
+
+                                        // compile the template
+                                        var template = Handlebars.compile(templateSource);
+
+                                        // The div/container that we are going to display the results in
+                                        var resultsPlaceholder = document.getElementById('friendsinviteddiv');
+
+                                        resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                                        if (result[10] == "true"){
+                                          //redirect to landing page
+                                          //window.location.href = "homepage.html";
+                                        }
+                                     }
+                                 }).error(function(){alert("wrong");});
+                           });
+
+                           invitedfriendarray = JSON.parse(invitedfriendarray);
+
+
+                  });
+              });
+
+        </script>
+
+        <script id="results-templatefour" type="text/x-handlebars-template">
+        {{#each Invites}}
+
+            <div class="WIM_createwimreviewfriendsdivindividualpeoplediv">
+                <img class="WIM_createwimreviewfriendsdivindividualpeopledivpic" src="php/files_uploaded/{{userID}}.jpg">
+                <h1 class="WIM_createwimreviewfriendsdivindividualpeopledivname">{{first}} {{last}}</h1>
+
+            </div>
+        {{/each}}
+        </script>
+
+        <!--wiminfonotwo script inport stuff-->
+        <!-- get height of meat content -->
+        <style>
+            .slick-prev {
+                left: 10px;
+                height: 50px;
+                top: 50%;
+            }
+
+            .slick-next {
+                right: 40px;
+                top: 50%;
+            }
+/*
+            .windowwithinfo {
+              overflow: hidden;
+              overflow-y: scroll;
+              height: 100% - 220px;
+            }
+*/
+        </style>
+
+        <!-- script for Modale-->
+        <script type='text/javascript' src='js/jquery.js'></script>
+        <script type='text/javascript'>
+
+            $(document).ready(function(){
+
+            //get the height and width of the page
+            var window_width = $(window).width();
+            var window_height = $(window).height();
+
+            //vertical and horizontal centering of modal window(s)
+            /*we will use each function so if we have more then 1
+            modal window we center them all*/
+            $('.select_friends_window').each(function(){
+
+                //get the height and width of the modal
+                var modal_height = $(this).outerHeight();
+                var modal_width = $(this).outerWidth();
+
+                //calculate top and left offset needed for centering
+                //var top = (window_height-modal_height)/6;
+                var top = 125;
+                var left = (window_width-modal_width)/2;
+
+                //apply new top and left css values
+                $(this).css({'top' : top , 'left' : left});
+
+            });
+
+
+                $('#activate_modal').click(function(){
+
+                      //get the id of the modal window stored in the name of the activating element
+                      var modal_id = $(this).attr('name');
+
+                      //use the function to show it
+                      show_modal(modal_id);
+
+                });
+
+                $('.close_modal').click(function(){
+
+                    //use the function to close it
+                    close_modal();
+
+                });
+
+            });
+
+            //THE FUNCTIONS
+
+            function close_modal(){
+
+                //hide the mask
+                $('#mask').fadeOut(500);
+
+                //hide modal window(s)
+                $('.select_friends_window').fadeOut(500);
+
+            }
+            function show_modal(modal_id){
+
+                //set display to block and opacity to 0 so we can use fadeTo
+                $('#mask').css({ 'display' : 'block', opacity : 0});
+
+                //fade in the mask to opacity 0.8
+                $('#mask').fadeTo(500,0.8);
+
+                 //show the modal window
+                $('#'+modal_id).fadeIn(500);
+
+            }
+        </script>
+
+
+
+
+
+
+  </head>
+  <body onload="checkloginsession()" style="width: 100%; height: 100%; overflow: hidden;">
+    <div class="phonedivforfullscreen">
+
+      <div id='mask' class='close_modal' style="z-index: 100"></div>
+      <div id='select_friends_window' class='select_friends_window' style="z-index: 100;">
+        <div id="generatefriendsgdiv"></div>
+      </div>
+      <div class="WIMheader">
+          <a href="homepage.html" style="z-index: -100;">
+              <img class="backarrow" src="web_images/back_arrow.png">
+          </a>
+          <div id="wimnameheaderdiv" class="headernameofpage">New WIM</div>
+          <div class="headerloggedinprofile">
+
+          </div>
+      </div>
+
+
+      <div id="mydiv" style="width: 100%; margin-top: 100px;">
+         <div class="your-class">
+              <div class="windowwithinfo" style="overflow: hidden; overflow-y: scroll; height: calc(100% - 220px);" >
+
+                <div class="WIM_createwimprogressbar"></div>
+
+
+                      <div class="WIM_createwiminputfielddiv">
+                          <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+                          <div class="WIM_createwiminputfielline"></div>
+                          <input id="wimname" class="WIM_createwiminputfieltextinput" placeholder="WIM name" onchange="reviewwimfunction()">
+                          <div class="WIM_createwimbottombar"></div>
+                      </div>
+
+                      <div class="WIM_createwiminputfielddiv">
+                          <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+                          <div class="WIM_createwiminputfielline"></div>
+                          <input id="destination" class="WIM_createwiminputfieltextinput" placeholder="Destination" onchange="reviewwimfunction()">
+                          <div class="WIM_createwimbottombar"></div>
+                      </div>
+                      <div class="WIM_createwiminputfielddiv">
+                          <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+                          <div class="WIM_createwiminputfielline"></div>
+                          <input id="address" class="WIM_createwiminputfieltextinput" placeholder="Address" onchange="reviewwimfunction()">
+                          <div class="WIM_createwimbottombar"></div>
+                      </div>
+                      <div class="WIM_createwiminputfielddiv">
+                          <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+                          <div class="WIM_createwiminputfielline"></div>
+                          <input id="attire" class="WIM_createwiminputfieltextinput" placeholder="Attire" onchange="reviewwimfunction()">
+                          <div class="WIM_createwimbottombar"></div>
+                      </div>
+
+                      <div class="WIM_createwiminputfielddiv">
+                          <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+                          <div class="WIM_createwiminputfielline"></div>
+                          <textarea rows="4" cols="50" id="description" class="WIM_createwiminputfieltextinputtextarea" placeholder="Description" onchange="reviewwimfunction()"></textarea>
+                          <div class="WIM_createwimbottombar"></div>
+                      </div>
+                      <div class="WIM_createwiminputfielddiv">
+                          <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+                          <div class="WIM_createwiminputfielline"></div>
+                          <textarea rows="4" id="miscinfo"  cols="50"class="WIM_createwiminputfieltextinputtextarea" placeholder="Misc. info" onchange="reviewwimfunction()"></textarea>
+                          <div class="WIM_createwimbottombar"></div>
+                      </div>
+
+
+             </div>
+              <div class="windowwithinfo" style="overflow: hidden; overflow-y: scroll; height: calc(100% - 220px);">
+
+                      <div class="WIM_createwimprogressbar"></div>
+
+                      <h1 class="WIM_createwiminvitefriends">Background image</h1>
+
+                      <div class="WIM_createwimpicturepreview">
+                          <img id="bigpicturepreview" class="WIM_createwimpicturepreviewimg" style="background-image: url(http://www.xantheberkeley.com/wp-content/uploads/2013/03/pillowfight8.jpg);">
+                      </div>
+
+
+
+                       <div class="WIM_createwiminputfielddivselectbackgroundimagediv" style="background-color: lightgray;">
+                         <!-- ask jason what's up with the picture not showing up?-->
+                           <img id="1" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://media.komonews.com/images/091202_black_screen.jpg);">
+                           <img id="2" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://i.telegraph.co.uk/multimedia/archive/03519/potd-squirrel_3519920k.jpg);">
+                           <img id="3" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://www.foreverfitness24.com/wp-content/uploads/2014/08/gym.jpg);">
+                           <img id="4" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://favim.com/orig/201105/27/camp-camping-film-fire-friends-gorgeous-Favim.com-56474.jpg);">
+                           <img id="5" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://static1.squarespace.com/static/554a7cece4b0037c64932115/t/55526bf2e4b0da857ce3414c/1431464951121/three_new_yoga_poses.jpg?format=1500w);">
+                           <img id="6" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://blog.codyapp.com/wp-content/uploads/2013/04/half_day_hike.jpg);">
+                           <img id="7" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(https://jobspotting.com/wp-content/uploads/2015/07/Gods-house.jpg);">
+                      </div>
+
+                      <div class="WIM_createwimprogressbar"></div>
+
+                      <button id="activate_modal" name='select_friends_window' href='#' class="WIMcreatewimbutton" style="margin-top: 0px;">
+                              <h1 class="WIMcreatewimbuttontext">Invite friends</h1>
+                      </button>
+
+
+
+              </div>
+
+
+              <div class="windowwithinfo" style="overflow: hidden; overflow-y: scroll; height: calc(100% - 220px);">
+
+                <h1 class="WIMinfopeoplegoingheader" >Review WIM</h1>
+
+                <div class="WIM_createwimpicturepreview">
+                    <img id="reviewbigpicturepreview" class="WIM_createwimpicturepreviewimg" style="background-image: url(https://news.starbucks.com/uploads/images/Store_Design/Kerry_Center_China.jpg);">
+                </div>
+
+
+
+                <div class="WIM_createwimreviewfriendsdiv" onclick="reviewwimfunction()">
+                    <div id="friendsinviteddiv"></div>
+                    <!--just a placeholder until i can figure out how to javascript create nested divs-->
+        <!--
+                    <div class="WIM_createwimreviewfriendsdivindividualpeoplediv">
+                        <h1 id="invitedfriendarrayplaceholderdiv" class="WIM_createwimreviewfriendsdivindividualpeopledivname"></h1>
+
+                    </div>
+
+                    <!--end placeholder-->
+
+                </div>
+
+                <div id="wimnametext" class="WIM_createwimreviewinfo" style="margin-top: -30px; font-size: 50px; line-height: 50px; font-family: Arial Black;">
+                NA
+
+                </div>
+                <div class="WIM_createwimreviewinfolable">WIM name</div>
+
+                <div id="destintiontext" class="WIM_createwimreviewinfo">NA</div>
+                <div class="WIM_createwimreviewinfolable">Destination</div>
+
+                <div id="addresstext"class="WIM_createwimreviewinfo">NA</div>
+                <div class="WIM_createwimreviewinfolable">Address</div>
+
+                <div id="attiretext" class="WIM_createwimreviewinfo">NA</div>
+                <div class="WIM_createwimreviewinfolable">Attire</div>
+
+                <div id="descriptiontext" class="WIM_createwimreviewinfo">NA</div>
+                <div class="WIM_createwimreviewinfolable">Description</div>
+
+                <div id="miscinfotext" class="WIM_createwimreviewinfo">NA</div>
+                <div class="WIM_createwimreviewinfolable">Misc info</div>
+
+
+
+              <button id="submitwimbutton" class="WIMcreatewimbutton" style="margin-top: 10px;">
+                      <h1 class="WIMcreatewimbuttontext">submit WIM</h1>
+              </button>
+          </div>
+
+
+              </div>
+         </div>
+      </div>
+
+
+
+
+
+      <div class="WIMinfobottomnav">
+          <div class="WIMinfobottomnavbuttons" onclick="destination()" >
+              <img class="WIMinfobottomnavicon" src="web_images/friends.png" style="height:140; margin-top: -10; margin-left: 26%;">
+          </div>
+              <div class="WIMinfobottomnavborderbar">
+              </div>
+          <div class="WIMinfobottomnavbuttons" onclick="peoplegoing()" >
+              <img class="WIMinfobottomnavicon" src="web_images/destination.png">
+          </div>
+              <div class="WIMinfobottomnavborderbar">
+              </div>
+          <div class="WIMinfobottomnavbuttons" onclick="vehicles()" >
+              <img class="WIMinfobottomnavicon" src="web_images/car-2.png" style="height:140; margin-top: -10; margin-left: 28%;">
+          </div>
+
+
+      </div>
+</div>
+      <!--
+  <div style="height: 90%; margin-top: 100px;">
+
+    <div class="WIM_createwimpicturepreview">
+        <img id="bigpicturepreview" class="WIM_createwimpicturepreviewimg" style="background-image: url(https://news.starbucks.com/uploads/images/Store_Design/Kerry_Center_China.jpg);">
+    </div>
+
+
+
+     <div class="WIM_createwiminputfielddivselectbackgroundimagediv" style="background-color: lightgray;">
+         <img id="1" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(https://news.starbucks.com/uploads/images/Store_Design/Kerry_Center_China.jpg);">
+         <img id="2" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://i.telegraph.co.uk/multimedia/archive/03519/potd-squirrel_3519920k.jpg);">
+         <img id="3" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://www.foreverfitness24.com/wp-content/uploads/2014/08/gym.jpg);">
+         <img id="4" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://i.telegraph.co.uk/multimedia/archive/03557/POTD-sheep_3557057k.jpg);">
+         <img id="5" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(https://www.drleeds.com/wp-content/uploads/2015/11/Depositphotos_14038305_m-2015.jpg);">
+         <img id="6" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(http://blog.codyapp.com/wp-content/uploads/2013/04/half_day_hike.jpg);">
+         <img id="7" class="WIM_createwiminputfielddivselectbackgroundimage" style="background-image: url(https://jobspotting.com/wp-content/uploads/2015/07/Gods-house.jpg);">
+    </div>
+
+    <div class="WIM_createwimprogressbar"></div>
+
+
+          <div class="WIM_createwiminputfielddiv">
+              <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+              <div class="WIM_createwiminputfielline"></div>
+              <input id="wimname" class="WIM_createwiminputfieltextinput" placeholder="WIM name" onchange="reviewwimfunction()">
+              <div class="WIM_createwimbottombar"></div>
+          </div>
+
+          <div class="WIM_createwiminputfielddiv">
+              <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+              <div class="WIM_createwiminputfielline"></div>
+              <input id="destination" class="WIM_createwiminputfieltextinput" placeholder="Destination" onchange="reviewwimfunction()">
+              <div class="WIM_createwimbottombar"></div>
+          </div>
+          <div class="WIM_createwiminputfielddiv">
+              <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+              <div class="WIM_createwiminputfielline"></div>
+              <input id="address" class="WIM_createwiminputfieltextinput" placeholder="Address" onchange="reviewwimfunction()">
+              <div class="WIM_createwimbottombar"></div>
+          </div>
+
+
+
+          <div class="WIM_createwimprogressbar"></div>
+
+
+
+          <div class="WIM_createwiminputfielddiv">
+              <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+              <div class="WIM_createwiminputfielline"></div>
+              <input id="attire" class="WIM_createwiminputfieltextinput" placeholder="Attire" onchange="reviewwimfunction()">
+              <div class="WIM_createwimbottombar"></div>
+          </div>
+
+          <div class="WIM_createwiminputfielddiv">
+              <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+              <div class="WIM_createwiminputfielline"></div>
+              <textarea rows="4" cols="50" id="description" class="WIM_createwiminputfieltextinputtextarea" placeholder="Description" onchange="reviewwimfunction()"></textarea>
+              <div class="WIM_createwimbottombar"></div>
+          </div>
+          <div class="WIM_createwiminputfielddiv">
+              <img class="WIM_createwiminputfielpic" src="web_images/destination.png">
+              <div class="WIM_createwiminputfielline"></div>
+              <textarea rows="4" id="miscinfo"  cols="50"class="WIM_createwiminputfieltextinputtextarea" placeholder="Misc. info" onchange="reviewwimfunction()"></textarea>
+              <div class="WIM_createwimbottombar"></div>
+          </div>
+
+
+
+          <div class="WIM_createwimprogressbar"></div>
+
+          <h1 class="WIM_createwiminvitefriends">Invite friends</h1>
+
+              <div id="generatefriendsgdiv"></div>
+
+
+
+          <h1 class="WIMinfopeoplegoingheader" >Review WIM</h1>
+
+          <div class="WIM_createwimpicturepreview">
+              <img id="reviewbigpicturepreview" class="WIM_createwimpicturepreviewimg" style="background-image: url(https://news.starbucks.com/uploads/images/Store_Design/Kerry_Center_China.jpg);">
+          </div>
+
+
+
+          <div class="WIM_createwimreviewfriendsdiv" onclick="reviewwimfunction()">
+              <div id="friendsinviteddiv"></div>
+  -->
+              <!--just a placeholder until i can figure out how to javascript create nested divs-->
+  <!--
+              <div class="WIM_createwimreviewfriendsdivindividualpeoplediv">
+                  <h1 id="invitedfriendarrayplaceholderdiv" class="WIM_createwimreviewfriendsdivindividualpeopledivname"></h1>
+
+              </div>
+  -->
+              <!--end placeholder-->
+  <!--
+          </div>
+
+          <div id="wimnametext" class="WIM_createwimreviewinfo" style="margin-top: -30px; font-size: 50px; line-height: 50px; font-family: Arial Black;">
+          NA
+
+          </div>
+          <div class="WIM_createwimreviewinfolable">WIM name</div>
+
+          <div id="destintiontext" class="WIM_createwimreviewinfo">NA</div>
+          <div class="WIM_createwimreviewinfolable">Destination</div>
+
+          <div id="addresstext"class="WIM_createwimreviewinfo">NA</div>
+          <div class="WIM_createwimreviewinfolable">Address</div>
+
+          <div id="attiretext" class="WIM_createwimreviewinfo">NA</div>
+          <div class="WIM_createwimreviewinfolable">Attire</div>
+
+          <div id="descriptiontext" class="WIM_createwimreviewinfo">NA</div>
+          <div class="WIM_createwimreviewinfolable">Description</div>
+
+          <div id="miscinfotext" class="WIM_createwimreviewinfo">NA</div>
+          <div class="WIM_createwimreviewinfolable">Misc info</div>
+
+
+
+        <button id="submitwimbutton" class="WIMcreatewimbutton">
+                <h1 class="WIMcreatewimbuttontext">submit WIM</h1>
+        </button>
+    </div>
+
+
+
+  </div>
+  -->
+  <!--begin test-->
+
+
+
+
+
+  <!--end of test-->
+
+
+
+
+
+
+
+
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.your-class').slick();
+
+
+    });
+</script>
+
+
+<script>
+    //$('#mydiv').height( $(window).height() / 3 );
+    //alert($(window).height() - 220 );
+    //$('.windowwithinfo').height( ($(window).height() / 3) - 220 );
+</script>
+
+
+
+
+<!--slider button jquery -->
+<script>
+$(document).ready(function(){
+    $("#createwim").click(function(){
+        // Manually refresh positioning of slick
+        $('.WIM_meat_slider_div').slickGoTo('2');
+    });
+
+    $("#wimfeed").click(function(){
+        // Manually refresh positioning of slick
+        $('.WIM_meat_slider_div').slickGoTo('0');
+    });
+
+    $("#friends").click(function(){
+        // Manually refresh positioning of slick
+        $('.WIM_meat_slider_div').slickGoTo('1');
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

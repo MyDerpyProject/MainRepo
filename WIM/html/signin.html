@@ -1,0 +1,100 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+</head>
+<body>
+<div class="signin">
+  <div class="phonedivforfullscreen">
+      <img class="singinheader" src="web_images/WIMlogo01.png"/>
+      <div class="signinuserinterfacediv">
+          <div class="signinuserinterfacefield" style="border-radius: 10px 10px 0px 0px">
+              <img class="signinpicture" src="web_images/user.png">
+              <input id="username" class="signintextfield"type="text" name="username" placeholder="Username">
+
+          </div>
+          <div class="signinseparateline"></div>
+          <div class="signinuserinterfacefield" style="border-radius: 0px 0px 10px 10px">
+              <img class="signinpicture" src="web_images/padlock-lock-icon.png">
+              <input id="password" class="signintextfield"type="password" name="password" placeholder="Password">
+          </div>
+
+      <a href="hompage.html">
+          <div class="signinbutton">
+              <h1 id="loginbutton" class="signinbuttontext">Log in</h1>
+          </div>
+      </a>
+
+
+      <a href="newprofile.html">
+          <div class="signinbutton" style="margin-top: 4%;">
+              <h1 id="loginbutton" class="signinbuttontext">Sign up</h1>
+          </div>
+      </a>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--
+
+<div id="result"></div>
+<input type="text"/></br>
+<input type="password"/></br>
+<button id="loginbutton">click to log in</button></br>
+-->
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js">
+
+</script>
+<script>
+
+$(function(){
+
+
+    var loginbutton =   $('#loginbutton');
+    var logoutbutton =   $('#logoutbutton');
+    var usernamevar =   $('#username');
+    var passwordvar =   $('#password');
+
+    loginbutton.on('click', function(e){
+       //alert("firsttesting");
+      e.preventDefault();
+
+      var usernamevarjsonval = usernamevar.val();
+      var passwordvarjsonval = passwordvar.val();
+
+      var mydata = {username: usernamevarjsonval, password: passwordvarjsonval};
+        $.ajax({
+                 url:"php/login.php",
+                 type:"POST",
+                 dataType: "json",
+                 data: mydata,
+                 beforeSend: function(){
+                     //alert("testing");
+                 },
+                 success:function(result){
+                    $("#result").html(result);
+
+                    if (result[10] == "true"){
+                      //redirect to landing page
+                      //alert(result[10]);
+                      window.location.href = "homepage.html";
+                    }
+                 }
+             }).error(function(){alert("wrong");});
+       });
+
+      })
+
+
+</script>
+
+
+</body>
+</html>

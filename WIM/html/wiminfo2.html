@@ -1,0 +1,685 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+
+
+
+
+    <!-- The handlebar template -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+
+    <!--CHECK SESSION IF LOGGED IN?-->
+    <script>
+    function checkloginsession() {
+        //alert("Page is loaded");
+
+
+    //script to logout
+      $(function(){
+
+
+          var logoutbutton =   $('#logoutbutton');
+
+
+
+
+
+              var mydata = {logout: "logout"};
+                $.ajax({
+                         url:"php/checksessionloggedin.php",
+                         type:"POST",
+                         dataType: "json",
+                         data: mydata,
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            $("#result").html(result);
+                            //alert(result);
+
+                            //redirect if session login is not true
+                            if (result != "true") {
+                              //alert("seriously")
+
+                              window.location.href = "signin.html";
+                            }else{
+                              //alert("session is true");
+                            }
+
+                            //if (result == "loggedin"){
+                              //alert("something wonky happened");
+                              //redirect to landing page
+                              //window.location.href = "landingpage.html";
+                            //}
+                         }
+                     }).error(function(){
+
+              })
+
+
+        });
+      };
+
+    </script>
+
+
+    <script>
+
+    window.onload = function(){
+        // All code comes here
+        $(function(){
+
+
+          //alert("something");
+                  $.ajax({
+                           url:"php/checkuserstatusforwim.php",
+                           type:"POST",
+                           dataType: "json",
+                           beforeSend: function(){
+                               //alert("testing");
+                           },
+                           success:function(result){
+
+                              //alert(result);
+
+                              if(result == "Going"){
+
+                                var s = document.getElementById("main");
+
+                                s.style.backgroundColor = "green";
+                                s.innerHTML = "going";
+                              }
+
+                              if(result == "maybe"){
+
+                                var s = document.getElementById("main");
+
+                                s.style.backgroundColor = "yellow";
+                                s.innerHTML = "Maybe";
+                              }
+
+                              if(result == "decline"){
+
+                                var s = document.getElementById("main");
+
+                                s.style.backgroundColor = "red";
+                                s.innerHTML = "Decline";
+                              }
+
+
+                           }
+                       }).error(function(){alert("error not logged out");});
+
+
+                });
+
+
+
+
+
+
+ };
+
+
+    </script>
+
+
+    <script>
+    //retrieve info for homepage wims
+      $(function(){
+
+              $.ajax({
+                       url:"php/wiminfophpretrieve.php",
+                       type:"POST",
+                       dataType: "json",
+                       beforeSend: function(){
+                           //alert("testing");
+                       },
+                       success:function(result){
+                          $("#result").html(result);
+
+
+                          result.forEach(function(entry) {
+                              console.log(entry);
+                          });
+
+
+                          // The template code
+                          var templateSource = document.getElementById('results-template').innerHTML;
+
+                          // compile the template
+                          var template = Handlebars.compile(templateSource);
+
+                          // The div/container that we are going to display the results in
+                          var resultsPlaceholder = document.getElementById('invitesdiv');
+
+                          resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+                       }
+                   }).error(function(){alert("wrong");});
+             });
+
+
+
+      </script>
+
+      <script id="results-template" type="text/x-handlebars-template">
+      {{#each Invites}}
+
+      <div>
+         <div class="WIMmeat">
+             <div id="infodestination" class="WIMinfodestination" >
+                 <div class="blacktransparentoverlay">
+                 </div>
+                 <div class="WIMinfodestinationbackground" style="background-image: {{backgroundpic}};">
+                </div>
+
+
+                 <div id="wrapper">
+                       <div id="main" onclick="slide();" style="text-align:center; line-height: 75px; font-family: Arial Black;">Maybe</div>
+                       <div class="circle" id="x1" onclick="select('x1', 'red', 'decline'); shut();" style="text-align:center; line-height: 75px; font-family: Arial Black;">Decline</div>
+                       <div class="circle" id="x2" onclick="select('x2', 'yellow', 'maybe'); shut();" style="text-align:center; line-height: 75px; font-family: Arial Black;">Maybe</div>
+                       <div class="circle" id="x3" onclick="select('x3', 'green', 'going'); shut();" style="text-align:center; line-height: 75px; font-family: Arial Black;">Going</div>
+                 </div>
+                 <img class="WIMinfohostpicture" src="php/files_uploaded/{{creatorID}}.jpg">
+
+                    <div class="WIMinfodestinationname">
+                        <h2 class="WIMinfodestinationnametext">{{destination}}</h2>
+                    </div>
+
+                    <div class="WIMinfodirectionsname">
+                        <h2 class="WIMinfodirectionsnametext">Directions</h2>
+                    </div>
+
+
+
+
+                <div class="WIMinfodestinationextrainfo">
+                     <div class="WIMinfodestinationinfothings">
+                         <div class="WIMinfodestinationinfothingstitle">
+                             Host
+                         </div>
+                         <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                         </div>
+                         <div class="WIMinfodestinationinfothingsactualinfo">
+                             {{host}}
+                         </div>
+                    </div>
+
+                    <div class="WIMinfodestinationinfothings">
+                        <div class="WIMinfodestinationinfothingstitle">
+                                Attire
+                            </div>
+                            <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                            </div>
+                            <div class="WIMinfodestinationinfothingsactualinfo">
+                                {{attire}}
+                        </div>
+                   </div>
+
+                     <div class="WIMinfodestinationinfothings">
+                        <div class="WIMinfodestinationinfothingstitle">
+                                 Start/end time
+                             </div>
+                             <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                             </div>
+                             <div class="WIMinfodestinationinfothingsactualinfo">
+                                 {{starttime}} - {{endtime}}
+                             </div>
+                        </div>
+                        <div class="WIMinfodestinationinfothings">
+                            <div class="WIMinfodestinationinfothingstitle">
+                                Description
+                            </div>
+                            <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                            </div>
+                            <div class="WIMinfodestinationinfothingsactualinfo">
+                                {{description}}
+                            </div>
+                        </div>
+
+
+
+
+                     <div class="WIMinfodestinationinfothings">
+                         <div class="WIMinfodestinationinfothingstitle">
+                                 Mutual invite?
+                             </div>
+                             <div class="WIMinfodestinationinfothingstitlelinediv">
+
+                             </div>
+                             <div class="WIMinfodestinationinfothingsactualinfo">
+                                 {{mutualinvite}}
+                          </div>
+                    </div>
+
+                </div>
+            </div>
+         </div>
+
+     </div>
+
+
+      {{/each}}
+
+      </script>
+
+
+      <script>
+      //retrieve info for homepage wims
+        $(function(){
+
+                $.ajax({
+                         url:"php/wiminfophpretrieve.php",
+                         type:"POST",
+                         dataType: "json",
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            $("#result").html(result);
+
+
+                            result.forEach(function(entry) {
+                                console.log(entry);
+                            });
+
+
+                            // The template code
+                            var templateSource = document.getElementById('results-templatetwo').innerHTML;
+
+                            // compile the template
+                            var template = Handlebars.compile(templateSource);
+
+                            // The div/container that we are going to display the results in
+                            var resultsPlaceholderwimnameheader = document.getElementById('wimnameheaderdiv');
+
+                            resultsPlaceholderwimnameheader.innerHTML = template({ Invites : result });
+
+
+                         }
+                     }).error(function(){alert("wrong");});
+               });
+
+
+
+        </script>
+
+        <script id="results-templatetwo" type="text/x-handlebars-template">
+        {{#each Invites}}
+
+              {{wimname}}
+
+        {{/each}}
+
+        </script>
+
+
+        <!--post friends who are going and stuff-->
+        <script>
+        //retrieve freinds divs
+          $(function(){
+
+                  $.ajax({
+                           url:"php/wiminfophpretrievefriendinvitestatus.php",
+                           type:"POST",
+                           dataType: "json",
+                           beforeSend: function(){
+                               //alert("testing");
+                           },
+                           success:function(result){
+                              $("#result").html(result);
+                              //alert("  sss  "+result);
+                              //alert(result[0]);
+                              //alert(result[1]);
+
+
+
+
+                              result.forEach(function(entry) {
+                                  console.log(entry);
+                              });
+                              //var profilefavpet = result[9];
+
+                              //alert(userimagesrc);
+                              //header
+                              //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                              // The template code
+                              var templateSource = document.getElementById('results-templatethree').innerHTML;
+
+                              // compile the template
+                              var template = Handlebars.compile(templateSource);
+
+                              // The div/container that we are going to display the results in
+                              var resultsPlaceholder = document.getElementById('generatefriendsgdiv');
+
+                              resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                              if (result[10] == "true"){
+                                //redirect to landing page
+                                //window.location.href = "homepage.html";
+                              }
+                           }
+                       }).error(function(){alert("wrong");});
+                 });
+
+
+
+          </script>
+
+          <script id="results-templatethree" type="text/x-handlebars-template">
+          {{#each Invites}}
+
+          <!--<h2> Welcome:  {{creatorID}} {{wimname}}</h2>-->
+              <!--<a href="profile.html">-->
+                  <span id="{{userID}}"class="WIMinfopeoplegoingpersondiv">
+                      <img class="WIMinfopeoplegoingpersonpic" src="php/files_uploaded/{{userID}}.jpg">
+                      <h1 class="WIMinfopeoplegoingpersonname">{{username}}</h1>
+                      <h2 class="WIMinfopeoplegoingpersonusername">{{first}} {{last}}</h2>
+                  </span>
+              <!--</a>-->
+          {{/each}}
+          </script>
+
+
+
+
+          <!--post car info and such-->
+          <script>
+          //retrieve freinds divs
+            $(function(){
+
+                    $.ajax({
+                             url:"php/wiminfocarsinfo.php",
+                             type:"POST",
+                             dataType: "json",
+                             beforeSend: function(){
+                                 //alert("testing");
+                             },
+                             success:function(result){
+                                $("#result").html(result);
+                                //alert("  sss  "+result);
+                                //alert(result[0]);
+                                //alert(result[1]);
+
+
+
+                /*
+                                result.forEach(function(entry) {
+                                    console.log(entry);
+
+
+                                });
+                */
+                                //var profilefavpet = result[9];
+
+                                //alert(userimagesrc);
+                                //header
+                                //document.getElementById("headerprofileimage").src= profileimagesrc;
+
+                                // The template code
+                                var templateSource = document.getElementById('results-templatefour').innerHTML;
+
+                                // compile the template
+                                var template = Handlebars.compile(templateSource);
+
+                                // The div/container that we are going to display the results in
+                                var resultsPlaceholder = document.getElementById('generatecarsgdiv');
+
+                                //resultsPlaceholder.innerHTML = template({ Invites : result });
+
+
+
+
+
+                             }
+                         }).error(function(){alert("wrong");});
+                   });
+
+
+
+            </script>
+
+            <script id="results-templatefour" type="text/x-handlebars-template">
+            {{#each Invites}}
+
+            <!--<h2> Welcome:  {{creatorID}} {{wimname}}</h2>-->
+                <!--<a href="profile.html">-->
+                    <span id="{{userID}}"class="WIMinfopeoplegoingpersondiv">
+                        <img class="WIMinfopeoplegoingpersonpic" src="php/files_uploaded/1.jpg">
+                        <h1 class="WIMinfopeoplegoingpersonname">{{carID}}</h1>
+                        <h2 class="WIMinfopeoplegoingpersonusername">{{drivername}} {{numberincar}}</h2>
+                    </span>
+                <!--</a>-->
+            {{/each}}
+            </script>
+
+
+
+
+
+
+</head>
+<body onload="checkloginsession()" style="width: 100%; height: 100%; overflow: hidden; background-color: #FFFFFF;">
+
+
+
+    <div id='mask' class='close_modal' style="z-index: 100"></div>
+    <div id='select_friends_window' class='select_friends_window' style="z-index: 100">This is the first modal window </div>
+    <div class="WIMheader">
+            <div class="WIM_meat_slider_div" style="position: absolute; width: 45%; margin-left: 27.5%; height: 100px; text-align: center; font-size: 70px; line-height: 100px; font-family: Arial Black; color: white; float: left; margin-top: 0px;">
+          <div>WIM Feed</div>
+          <div>My Friends</div>
+          <div>Create WIM</div>
+
+
+          </div>
+
+
+              <div class="headerloggedinprofile">
+                  <img id="logoutbutton" src="web_images/login.png" style="height: 70; margin: 15px; margin-right: 10px;">
+              </div>
+    </div>
+
+
+    <div id="mydiv" style="background-color: #FFFFFF; width: 100%; margin-top: 75px;">
+            <div style="background-color: #FFFFFF; overflow-y: auto;">
+
+              <div id="generatecarsgdiv"></div>
+
+              <div id="infovehicles" class="WIMinfovehicles" >
+                  <h1 class="WIMinfopeoplegoingheader">Vehicles</h1>
+                  <div class="WIMinfovehiclediv">
+                      <a href="wiminfocarpeople.html">
+                          <img class="WIMinfovehicleimg" src="web_images/car-2.png">
+                          <h2 class="WIMinfovehicledrivername">Braxton Young</h2>
+                          <div class="WIMinfovehicleopenseats">5/6</div>
+                      </a>
+                  </div>
+                  <div class="WIMinfovehiclediv">
+                      <a href="wiminfocarpeople.html">
+                          <img class="WIMinfovehicleimg" src="web_images/car-2.png">
+                          <h2 class="WIMinfovehicledrivername">Stacy Simms</h2>
+                          <div class="WIMinfovehicleopenseats">1/5</div>
+                      </a>
+                  </div>
+                  <div class="WIMinfovehiclediv">
+                      <a href="wiminfocarpeople.html">
+                          <img class="WIMinfovehicleimg" src="web_images/car-2.png">
+                          <h2 class="WIMinfovehicledrivername">Brian Smith</h2>
+                          <div class="WIMinfovehicleopenseats">Full</div>
+                      </a>
+                  </div>
+                  <div class="WIMinfovehiclediv" div>
+                      <div class="WIMinfovehicleaddvehicle">
+                          <img src="web_images/plus_icon.png" style="width:80px; height:80px; margin: 35px;"></div>
+                          <h1 class="WIMinfopeoplegoingpersonname">Add Vehicle</h1>
+                  </div>
+              </div>
+
+            </div>
+            <div style="background-color: #FFFFFF; overflow-y: auto;">
+
+                <div id="invitesdiv"></div>
+
+            </div>
+            <div style="background-color: #FFFFFF; overflow-y: auto;">
+                <h1 class="WIMinfopeoplegoingheader">Participants</h1>
+
+                <!--div for generating attending-->
+                 <div id="generatefriendsgdiv"></div>
+
+                 <div class="WIMinfopeoplegoingpersondiv">
+                     <div class="WIMinfovehicleaddvehicle" style="margin: auto;">
+                       <a href="invitefriendstoexistingwim.html">
+                         <img src="web_images/plus_icon.png" style="width:80px; height:80px; margin: 35px; padding-top: 0;"></div>
+                      </a>
+                      <a href="invitefriendstoexistingwim.html">
+                         <h1 class="WIMinfopeoplegoingpersonname">Invite Friend</h1>
+                      </a>
+                 </div>
+
+            </div>
+       </div>
+    </div>
+
+
+
+
+
+    <div class="WIMinfobottomnav">
+        <div class="WIMinfobottomnavbuttons" onclick="destination()" >
+            <img class="WIMinfobottomnavicon" src="web_images/friends.png" style="height:140; margin-top: -10; margin-left: 26%;">
+        </div>
+            <div class="WIMinfobottomnavborderbar">
+            </div>
+        <div class="WIMinfobottomnavbuttons" onclick="peoplegoing()" >
+            <img class="WIMinfobottomnavicon" src="web_images/destination.png">
+        </div>
+            <div class="WIMinfobottomnavborderbar">
+            </div>
+        <div class="WIMinfobottomnavbuttons" onclick="vehicles()" >
+            <img class="WIMinfobottomnavicon" src="web_images/car-2.png" style="height:140; margin-top: -10; margin-left: 28%;">
+        </div>
+
+
+    </div>
+
+
+
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.your-class').slick();
+
+
+    });
+</script>
+
+
+<script>
+    $('#mydiv').height( $(window).height() - 210 );
+    //alert($(window).height() - 220 );
+</script>
+
+<!--Eric dot -->
+<script type="text/javascript">
+
+function slide() {
+  var d = document.getElementsByClassName("circle");
+
+  for(var i=0; i < d.length; i++) {
+    var element = d[i];
+    if (element.style.display == "") {
+      element.style.display = "flex";
+    }
+    }
+    }
+
+    function select(id, color, status) {
+    var d = document.getElementById(id);
+    var s = document.getElementById("main");
+
+
+    s.style.backgroundColor = color;
+    s.innerHTML = status;
+    //alert(status);
+
+
+
+    //script to logout
+      $(function(){
+
+            var statusvar = status;
+            //alert(statusvar);
+
+              var mydata = {response: statusvar};
+                $.ajax({
+                         url:"php/wimresponse.php",
+                         type:"POST",
+                         dataType: "json",
+                         data: mydata,
+                         beforeSend: function(){
+                             //alert("testing");
+                         },
+                         success:function(result){
+                            //$("#result").html(result);
+                            alert(result+" yay");
+
+                            //redirect if session login is not true
+
+                            }
+
+                            //if (result == "loggedin"){
+                              //alert("something wonky happened");
+                              //redirect to landing page
+                              //window.location.href = "landingpage.html";
+                            //}
+
+                     }).error(function(){alert("error not logged out");});
+               //});
+
+              })
+
+
+
+        }
+
+
+</script>
+<script>
+
+    function shut() {
+    var d = document.getElementsByClassName("circle");
+
+  for(var i=0; i < d.length; i++) {
+    var element = d[i];
+
+    if (element.style.display == "flex") {
+      element.style.display = "";
+    }
+    }
+    }
+
+</script>
+
+
+
+</body>
+</html>

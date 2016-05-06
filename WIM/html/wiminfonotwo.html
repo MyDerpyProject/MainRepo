@@ -1,0 +1,167 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="css/WIMactual.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <!-- slider links-->
+    <link rel="stylesheet" type="text/css" href="css/slick.css"/>
+
+        <!-- get height of meat content -->
+    <style>
+        .slick-prev {
+            left: 10px;
+            height: 50px;
+        }
+
+        .slick-next {
+            right: 60px;
+        }
+
+    </style>
+
+    <!-- script for Modale-->
+    <script type='text/javascript' src='js/jquery.js'></script>
+    <script type='text/javascript'>
+
+        $(document).ready(function(){
+
+        //get the height and width of the page
+        var window_width = $(window).width();
+        var window_height = $(window).height();
+
+        //vertical and horizontal centering of modal window(s)
+        /*we will use each function so if we have more then 1
+        modal window we center them all*/
+        $('.select_friends_window').each(function(){
+
+            //get the height and width of the modal
+            var modal_height = $(this).outerHeight();
+            var modal_width = $(this).outerWidth();
+
+            //calculate top and left offset needed for centering
+            var top = (window_height-modal_height)/2;
+            var left = (window_width-modal_width)/2;
+
+            //apply new top and left css values
+            $(this).css({'top' : top , 'left' : left});
+
+        });
+
+
+            $('.activate_modal').click(function(){
+
+                  //get the id of the modal window stored in the name of the activating element
+                  var modal_id = $(this).attr('name');
+
+                  //use the function to show it
+                  show_modal(modal_id);
+
+            });
+
+            $('.close_modal').click(function(){
+
+                //use the function to close it
+                close_modal();
+
+            });
+
+        });
+
+        //THE FUNCTIONS
+
+        function close_modal(){
+
+            //hide the mask
+            $('#mask').fadeOut(500);
+
+            //hide modal window(s)
+            $('.select_friends_window').fadeOut(500);
+
+        }
+        function show_modal(modal_id){
+
+            //set display to block and opacity to 0 so we can use fadeTo
+            $('#mask').css({ 'display' : 'block', opacity : 0});
+
+            //fade in the mask to opacity 0.8
+            $('#mask').fadeTo(500,0.8);
+
+             //show the modal window
+            $('#'+modal_id).fadeIn(500);
+
+        }
+</script>
+
+
+</head>
+<body style="width: 100%; height: 100%; overflow: hidden; background-color: green;">
+
+
+
+    <div id='mask' class='close_modal' style="z-index: 100"></div>
+    <div id='select_friends_window' class='select_friends_window' style="z-index: 100">This is the first modal window </div>
+    <div class="WIMheader">
+        <a href="homepage.html" style="z-index: -100;">
+            <img class="backarrow" src="web_images/back_arrow.png">
+        </a>
+        <div id="wimnameheaderdiv" class="headernameofpage">NA</div>
+        <div class="headerloggedinprofile">
+
+        </div>
+    </div>
+
+
+    <div id="mydiv" style="background-color: red; width: 100%; margin-top: 100px;">
+       <div class="your-class">
+            <div style="background-color: yellow"><p>test1</p>
+                <center><h1>Modal Window Demo</h1></center>
+                <p><a class='activate_modal' name='select_friends_window' href='#'>First modal window.</a></p>
+           </div>
+            <div style="background-color: orange"><p>test2</p></div>
+            <div style="background-color: green"><p>test3</p></div>
+       </div>
+    </div>
+
+
+
+
+
+    <div class="WIMinfobottomnav">
+        <div class="WIMinfobottomnavbuttons" onclick="destination()" >
+            <img class="WIMinfobottomnavicon" src="web_images/friends.png" style="height:140; margin-top: -10; margin-left: 26%;">
+        </div>
+            <div class="WIMinfobottomnavborderbar">
+            </div>
+        <div class="WIMinfobottomnavbuttons" onclick="peoplegoing()" >
+            <img class="WIMinfobottomnavicon" src="web_images/destination.png">
+        </div>
+            <div class="WIMinfobottomnavborderbar">
+            </div>
+        <div class="WIMinfobottomnavbuttons" onclick="vehicles()" >
+            <img class="WIMinfobottomnavicon" src="web_images/car-2.png" style="height:140; margin-top: -10; margin-left: 28%;">
+        </div>
+
+
+    </div>
+
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.7/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.your-class').slick();
+
+
+        });
+    </script>
+
+
+    <script>
+        $('#mydiv').height( $(window).height() - 220 );
+        //alert($(window).height() - 220 );
+    </script>
+
+
+
+
+</body>
