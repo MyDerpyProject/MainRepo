@@ -1,0 +1,1474 @@
+body {
+    margin: 0px;
+    max-width:1100px;
+    margin:0px auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.phonedivforfullscreen {
+  max-width: 100%;
+  margin: auto;
+}
+/* WIM firstpage */
+
+.firstpagesigninbig{
+    width: 100%;
+    height: 45%;
+    background-color: #00C7E2;
+    padding-top: 10%;
+
+}
+
+.firstpagesignincircle {
+    position: absolute;
+    height: 40%;
+    width: 40%;
+    margin-top: -20%;
+    margin-left: 30%;
+    border-radius: 50%;
+    background-color: #00C7E2;
+    z-index: -1;
+}
+
+.firstpagelogo {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 45%;
+
+}
+
+.firstpagesigninbutton {
+    line-height: 350px;
+    font-size: 100;
+    text-align: center;
+    color: white;
+    font-family: Arial Black;
+}
+
+.firstpagesignupbutton {
+    margin-top: 20%;
+    line-height: 40px;
+    font-size: 100;
+    text-align: center;
+    color: #00C7E2;
+    font-family: Arial Black;
+}
+
+/*sign in */
+
+.signin {
+  max-width: 1100px;
+  height: 100%;
+  min-width: 870;
+  background-color: #00C7E2;
+  position: absolute;
+  padding-bottom: 10%;
+}
+
+.singinheader {
+  margin-bottom: 15%;
+  margin-left: 14%;
+  margin-top: 15%;
+  width: 70%;
+}
+
+.signinuserinterfacediv {
+    width: 75%;
+    height: 182px;
+    margin-left: 12.5%;
+    background-color: white;
+    border-radius: 1vw
+}
+
+.signinuserinterfacefield {
+    width: 100%;
+    height: 89px;
+    float: left;
+}
+
+.signinseparateline {
+    height: 4px;
+    width: 100%;
+    background-color: #00C7E2;
+    float: left;
+}
+
+.signinpicture {
+    height: 69px;
+    width: 69px;
+    margin: 10px;
+    float: left;
+}
+
+.signintextfield {
+    width: calc(100% - 90px);
+    height: 89px;
+    font-size: 60px;
+    font-family: Arial;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    opacity: .7;
+}
+
+.signinbutton {
+    width: 100%;
+    height: 100px;
+    margin-top: 10%;
+    background-color: white;
+    border-radius: vw;
+    float: left;
+    border-radius: 7px;
+}
+
+.signinbuttontext {
+    color: black;
+    font-family: Arial ;
+    font-size: 80px;
+    text-align: center;
+    margin-top: 0px;
+    line-height: 100px;
+    opacity: 1;
+    color: #00C7E2;
+    border-radius: 7px;
+}
+/* header */
+
+.headernameofpage {
+    position: absolute;
+    width: 50%;
+    margin-left: 25%;
+    height: 100px;
+    text-align: center;
+    font-size: 65px;
+    line-height: 100px;
+    font-family: Arial Black;
+    color: white;
+    float: left;
+    margin-top: 0px;
+}
+
+
+.WIMheader {
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
+    background-color: #03A9F4;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.headernotifications {
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 7.5px;
+    background-color: white;
+    font-family: Arial;
+    line-height: 40px;
+    text-align: center;
+    font-size: 30px;
+    color: #D50000;
+}
+
+.headerloggedinprofile {
+    float: right;
+    height: 55px;
+    max-width: 35%;
+
+
+}
+
+.headerloggedinprofileimage {
+  margin: 5px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+.headerloggedinprofilename {
+    font-size: 25px;
+    line-height: 55px;
+    font-family: Arial;
+    color: white;
+    float: left;
+    margin-top: 0px;
+}
+
+.headeralertswordsdsfsdfsd {
+    line-height: 55px;
+    margin-top: 0;
+    float: right;
+    color: white;
+    font-family: Arial;
+    width: 90;
+    margin-right: 20;
+
+}
+
+.headeralertswords {
+   position:relative;
+    line-height: 55x;
+    margin-top: 12;
+    float: right;
+    color: white;
+    font-family: Arial;
+    font-size: 24px;
+    width: 90;
+    margin-right: 20;
+}
+.headeralertswords[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:-6px;
+   right:-12px;
+   font-size:.5em;
+   background: #bd2126;
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
+
+
+
+.backarrow {
+    height: 90px;
+    margin: 5px;
+    margin-top: 5px;
+    float: left;
+
+}
+
+.WIM_meat_slider_div {
+    height: 100%;
+    margin-top: 100;
+}
+
+.WIMmeat {
+    margin-left: ;
+    height: 100%;
+    width: 100vw;
+    overflow: hidden;
+    overflow-y: auto;
+}
+/*Home page */
+
+
+
+/*WIM Selectors/select wim */
+
+.WIMhomeswimtatusbar {
+    color: white;
+    line-height: 55px;
+    font-family: Arial;
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+    background-color: #4FC3F7;
+
+}
+
+.WIMselectorcategoryexplain {
+    height: 30px;
+}
+
+.WIMselectorcategoryexplainineach {
+    line-height: 30px;
+    font-size: 25px;
+    font-family: Arial;
+    float: left;
+    text-align: center;
+    color: lightgray;
+    opacity: .5;
+}
+
+.WIMselectorholderdiv {
+    width: 100%;
+    min-width: 1000px;
+    float: left;
+    top: 100px;
+    left: 0;
+    margin-bottom: .2%;
+}
+
+.WIMselector {
+    float: left;
+    height: 150px;
+    width: 100%;
+    min-width: 1000px;
+    opacity: 1;
+    background-color: rgba(4,4,4, .7);
+
+}
+
+.WIMselectorbackgroundimage {
+    float: left;
+    height: 150px;
+    width: 100%;
+    min-width: 1000px;
+    background-position: center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    margin-bottom: .5%;
+}
+
+.WIMselector:hover {
+    background-color: rgba(84, 94, 100, .5);
+
+}
+
+.WIMselectorhostimage {
+    height: 120px;
+    width: 15%x;
+    border-radius: 60px;
+    margin: 14px;
+    float: left;
+    border:2px solid gray;
+}
+
+.WIMselectorwimname {
+    min-width: 43%;
+    width: 43%;
+    line-height: 150px;
+    font-size: 40px;
+    float: left;
+    font-family: Arial;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+
+}
+
+.WIMselectorwimtypeimage {
+    height: 120px;
+    width: 120px;
+    margin-top: 15px;
+    margin-left: 5px;
+    float: left;
+}
+
+.WIMselectortimediv {
+    float: left;
+    margin-left: 5px;
+    height: 100%;
+    width: 15%;
+    text-decoration: none;
+    color: white;
+}
+
+.WIMselectortimecountdown {
+    float: left;
+    line-height: 130px;
+    font-size: 35px;
+    font-family: Arial;
+    text-align: center;
+    width: 100%;
+}
+
+.WIMselectortimeactual {
+    float: left;
+    line-height: 20px;
+    font-size: 15px;
+    font-family: Arial;
+    text-align: center;
+    width: 100%;;
+    margin-top: -40px;
+    color: darkgray;
+}
+
+.WIMselectornumbergoing {
+    height: 150px;
+    width: 12%;;
+    border-radius: 0px;
+    margin-top: 0px;
+    margin-left: 5px;
+    float: left;
+    /*background-color: #B3E5FC;*/
+    font-size: 80px;
+    line-height: 120px;
+    text-align: center;
+    font-family: Arial;
+    color: white;
+    ;
+}
+
+.WIMselectornumbergoingnumerator {
+    font-size: 70px;
+    height: 76px;
+    width: 100%;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 20px;
+    line-height: 76px;
+    float: left;
+}
+
+.WIMselectornumbergoingdenominator {
+    font-size: 70px;
+    height: 76px;
+    width: 100%;
+    margin-top: -76px;
+    line-height: 76px;
+    float: left;
+}
+
+.WIMselectornumbergoingline {
+    position: relative;
+    top: 45%;
+    height: 5px;
+    width: 60%;
+    margin-left: 20%;
+    background-color: white;
+
+}
+
+.WIMselectornumberavailable {
+    height: 120px;
+    width: 120px;
+    border-radius: 60px;
+    margin-top: 14px;
+    margin-left: 5px;
+    float: left;
+    background-color: lightgray;
+    border:2px solid gray;
+    font-size: 80px;
+    line-height: 120px;
+    text-align: center;
+    font-family: Arial;
+    color: darkgray;
+
+}
+.WIMselectorbottomline {
+    height: 2px;
+    width: 90%;
+    margin-left: 5%;
+    background-color: lightgray;
+    float: left;
+    border-radius: 10px;
+    opacity: .6;
+}
+
+/* WIM create Wim */
+
+.WIMcreatewimbutton {
+    width: 80%;
+    height: 250px;
+    margin-left: 10%;
+    margin-top: 250px;
+    background-color: #03A9F4;
+    float: left;
+    border-radius: 1vw;
+}
+
+.WIMcreatewimbutton:hover {
+    background-color: #4FC3F7;
+}
+
+.WIMcreatewimbuttontext {
+    color: white;
+    font-family: Arial ;
+    font-size: 75px;
+    text-align: center;
+    margin-top: 0px;
+    line-height: 250px;
+    opacity: 1;
+}
+
+
+/* create wim page */
+
+.WIM_createwimprogressbar {
+    margin-top: 7%;
+    height: 20px;
+    border-radius: 5px;
+    width: 60%;
+    margin-left: 20%;
+    background-color: #00C7E2;
+    float: left;
+    margin-bottom: 10%;
+}
+
+.WIM_createwimprofilepicviewer {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 5%;
+    clear: both;
+    background-color: lightgray;
+    background-image: url("https://lh3.googleusercontent.com/-NyINEu1cXoo/AAAAAAAAAAI/AAAAAAAAAAA/JAejCLzl9bs/photo.jpg");
+    background-position: center;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.WIM_createwimprofilepicuploadbutton {
+    height: 120px;
+    width: 60%;
+    border-radius: 5px;
+    margin: auto;
+    clear: both;
+    margin-top: 5%;
+    background-color: #00C7E2;
+    text-align: center;
+    line-height: 120px;
+    font-size: 40px;
+    font-family: Arial;
+    color: white;
+    display: block;
+}
+
+.WIM_createwiminputfielddiv {
+    width: 80%;
+    margin-left: 10%;
+    height: 80px;
+    float: left;
+    margin-bottom: 10%
+}
+
+.WIM_createwiminputfielddivselectbackgroundimagediv {
+    width: 800px;
+    margin: auto;
+    height: 130px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.WIM_createwiminputfielddivselectbackgroundimage {
+    height: 100px;
+    width: 100px;
+    float: left;
+    background-position: center;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    margin: 5px;
+
+}
+
+.WIM_createwiminputfielpic {
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+.WIM_createwiminputfielline {
+    float: left;
+    height: 100%;
+    width: 3px;
+    margin-top: 0%;
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+.WIM_createwiminputfieltextinput {
+    height: 80px;
+    width: 87%;
+    font-family: Arial;
+    font-size: 60;
+    opacity: .7;
+    float: left;
+    border: none;
+    text-indent: 10px;
+}
+
+.WIM_createwiminputfieltextinputtextarea {
+    height: 120px;
+    width: 87%;
+    font-family: Arial;
+    font-size: 30;
+    opacity: .7;
+    float: left;
+    border: none;
+    text-indent: 10px;
+}
+
+.WIM_createwimbottombar {
+    width: 100%;
+    height: 3px;
+    border-radius: 5px;
+    background-color: lightgray;
+    float: left;
+    margin-top: 10;
+    margin-left: 0;
+}
+
+.WIM_createwimpicturepreview {
+    background-color: black;
+    float: left;
+     width: 100%;
+    height: 200px;
+    margin-bottom: 60;
+}
+
+.WIM_createwimpicturepreviewimg {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 2%;
+    float: left;
+    background-position: center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    opacity: .7;
+}
+
+.WIM_createwiminvitefriends {
+    float: left;
+    line-height: 55px;
+    font-size: 45px;
+    width: 55%;
+    margin-left: 2.3%;
+    margin-top: 0;
+    text-align: center;
+    font-family: Arial Black;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.WIM_createwiminvitefriends {
+    float: left;
+    line-height: 55px;
+    font-size: 45px;
+    width: 100%;
+    margin-left: 2.3%;
+    margin-top: -8%;
+    text-align: center;
+    font-family: Arial Black;
+    color: black;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.WIM_createwimreviewinfo {
+    width: 100%;
+    font-family: Arial;
+    height: 50px;
+    font-size: 35px;
+    color: black;
+    opacity: .6;
+    float: left;
+    text-align: center;
+}
+
+.WIM_createwimreviewinfolable {
+    width: 100%;
+    font-family: Arial;
+    height: 20px;
+    font-size: 20px;
+    color: black;
+    opacity: .6;
+    float: left;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.WIM_createwimreviewfriendsdiv {
+    float: left;
+    width: 100%;
+    min-height: 160px;
+    background-color: #03A9F4;
+    margin-bottom: 40px;
+    margin-top: -40px;
+
+}
+
+.WIM_createwimreviewfriendsdivindividualpeoplediv {
+    height: 100px;
+    margin: 10px;
+    width: 150px;
+    margin-bottom: 25px;
+    float: left;
+}
+
+.WIM_createwimreviewfriendsdivindividualpeopledivpic {
+    height: 80px;
+    width: 80px;
+    margin: 10px;
+    margin-left: 35px;
+    margin-bottom: -12px;
+    border-radius: 50%;
+}
+
+.WIM_createwimreviewfriendsdivindividualpeopledivname {
+    text-align: center;
+    width: 100%;
+    height: 25px;
+    font-size: 20px;
+    font-family: Arial;
+    color: black;
+}
+
+.WIM_createwimpicturepreviewtabimg {
+    background-position: center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 160px;
+}
+
+.WIM_createwimpicturepreviewtabimgdiv {
+    height: 100px;
+    width: 300px;
+}
+
+/*create wim modal*/
+
+#mask{
+    position:absolute; /* important */
+    top:0px; /* start from top */
+    left:0px; /* start from left */
+    height:100%; /* cover the whole page */
+    width:100%;  /* cover the whole page */
+    display:none; /* don't show it '*/
+
+    /* styling bellow */
+    background-color: black;
+}
+
+.select_friends_window{
+    position:absolute; /* important so we can position it on center later */
+    display:none; /* don't show it */
+
+    /* styling bellow */
+    color:white;
+}
+
+/* style a specific modal window  */
+#select_friends_window {
+    border: 1px solid gray;
+    background: white;
+    color: black;
+    width: 85%;
+    height: 70%;
+    top: 125px;
+    margin: 0px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+/*WIM info */
+
+.WIMinfoname {
+    float: left;
+    line-height: 55px;
+    font-size: 45px;
+    width: 55%;
+    margin-left: 2.3%;
+    margin-top: 0;
+    text-align: center;
+    font-family: Arial Black;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.WIMinfobottomnav {
+   background-color: #03A9F4;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 120px;
+    width: 100%;
+    overflow:hidden;
+    font-family: Arial;
+    text-align: center;
+    line-height: 120px;
+    font-size: 80px;
+    color: white;
+}
+
+.WIMinfobottomnavbuttons {
+    height: inherit;
+    width: 32.33%;
+    float: left;
+    vertical-align:middle;
+
+}
+
+.WIMinfobottomnavicon {
+    height: 100px;
+    margin: auto;
+    display: inline-block;
+    margin-top: 10px;
+
+
+
+}
+
+.WIMinfobottomnavbuttons:hover {
+    background-color: #D9F0FF;
+
+}
+
+.WIMinfobottomnavborderbar {
+    width: .233%;
+    height: 80%;;
+    background-color: lightgray;
+    float: left;
+    margin-top: 1.5%;
+    margin-left: .55%;
+    margin-right: .55%;
+    border-radius: 10px;
+
+}
+
+.wrappertext{
+  text-align: center;
+  width: 100%;
+  line-height: 75px;
+  font-family: Arial Black;
+}
+
+/*WIM info destination */
+
+.WIMinfodestination {
+    //background-color: red;
+    height: inherit;
+    width: 100%;
+    position: absolute;
+
+}
+
+.WIMinfodestinationbackground {
+    height: 40%;
+    width: 100%;
+    float: left;
+    background-position: center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+
+}
+
+.blacktransparentoverlay {
+    background-color: black;
+    opacity: .5;
+    height: 40%;
+    width: 100%;
+    float: left;
+    position: absolute;
+}
+
+.WIMinfohostpicture {
+    height: 175px;
+    width: 175px;
+    border-radius: 100px;
+    margin: 25px;
+    position: absolute;
+}
+
+.WIMinfopersonalstatus {
+    height: 75px;
+    width: 75px;
+    border-radius: 100px;
+    margin-left: 85%;
+    margin-top: -150px;
+    background-color: #FF5722;
+    position: absolute;
+}
+
+.WIMinfodestinationname {
+    height: 80px;
+    display: inline-block;
+    background-color: rgba(0,0,0,.5);
+    border-top: 3px solid #ccc;
+    border-bottom: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    margin-top: 0px;
+    margin-right: 0px;
+    position: absolute;
+    margin-top: 220px;
+}
+
+h2.WIMinfodestinationnametext {
+    line-height: 80px;
+    margin-top: 2px;
+    font-size: 70px;
+    font-family: Arial;
+    color: white;
+    padding-left: 10;
+    padding-right: 10;
+}
+
+.WIMinfodirectionsname {
+    height: 40px;
+    display: inline-block;
+    background-color: rgba(0,0,0,.5);
+    border-top: 3px solid #ccc;
+    border-bottom: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    margin-top: -75px;
+
+}
+
+h2.WIMinfodirectionsnametext {
+    line-height: 40px;
+    margin-top: 2px;
+    font-size: 30px;
+    font-family: Arial;
+    color: white;
+    padding-left: 10;
+    padding-right: 10;
+}
+
+.WIMinfodestinationextrainfo {
+    float: left;
+    width: 100%;
+    background-color: #F7F5DD;
+
+}
+
+.WIMinfodestinationinfothings {
+    width: 49%;
+    height: 100px;
+    float: left;
+    background-color: ;
+}
+
+.WIMinfodestinationinfothingstitle {
+    height: 20%;
+    line-height: 20px;
+    font-size: 20px;
+    padding-top: 2%;
+    padding-left: 2%;
+    font-family: Arial;
+    color: gray;
+}
+
+.WIMinfodestinationinfothingstitlelinediv {
+    height: 2%;
+    width: 60%;
+    background-color: lightgray;
+    margin-left: 2%;
+}
+
+.WIMinfodestinationinfothingsactualinfo {
+    height: 78%;
+    line-height: 30px;
+    font-size: 30px;
+    padding-top: 2%;
+    padding-left: 2%;
+    font-family: Arial;
+    color: gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*WIM info people going */
+
+.WIMinfopeoplegoing {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 10;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.WIMinfopeoplegoingheader {
+    text-align: center;
+    width: 60%;
+    margin-left: 20%;
+    line-height: 60px;
+    font-size: 50px;
+    margin-top: 10px;
+    background-color: #00C7E2;
+    font-family: Arial;
+    color: white;
+    border-radius: 4px;
+    float: left;
+}
+
+.WIMinfopeoplegoingpersondiv {
+    float: left;
+    height: 250px;
+    width: calc(25% - 0px);
+    border: none;
+    background-color: white;
+  }
+
+.WIMinfopeoplegoingpersonpic {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    margin: auto;
+    background-color: lightgray;
+    display: block;
+    margin-top: 10px;
+}
+
+.WIMinfoperoplegoingpersonpicaddfriends {
+    width: 15px;
+    padding: 50px;
+    height: 35px;
+    border-radius: 75px;
+    margin-left: 35%;
+    margin-top: 15%;
+    background-color: lightgray;
+}
+
+.WIMinfopeoplegoingpersonname {
+    text-align: center;
+    font-family: Arial;
+    margin-top: px;
+    color: black;
+    opacity: .8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 25px;
+}
+
+.WIMinfopeoplegoingpersonusername {
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    margin-top: -20px;
+    color: black;
+    opacity: .5
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*WIM info vehicles */
+
+.WIMinfovehicles {
+    height: 700px;
+    width: 100%;
+    position: absolute;
+    opacity: 10;
+}
+
+.WIMinfovehiclediv {
+    width: 50%;
+    height: 250px;
+    float: left;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.WIMinfovehicleimg {
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.WIMinfovehicledrivername {
+    text-align: center;
+    font-family: Arial;
+    margin-top: px;
+    color: black;
+    opacity: .7;
+    font-size: 40px;
+    margin-top: -100;
+}
+
+.WIMinfovehicleopenseats {
+    position: absolute;
+    height: 35px;
+    width: 60px;
+    border-radius: 20px;
+    background-color: lightgray;
+    margin-top: -26.5%;
+    margin-left: 44%;
+    text-align: center;
+    line-height: 40px;
+    font-family: Arial;
+    font-size: 30px;
+    color: gray;
+
+}
+
+.WIMinfovehicleaddvehicle {
+    width: 150px;
+    padding: .1px;
+    height: 150px;
+    border-radius: 75px;
+    margin-left: 35%;
+    margin-top: 15%;
+    background-color: lightgray;
+}
+
+/*WIM info people in each vehicle */
+
+.infovehiclespeopleinside {
+    margin-top: 55px;
+    width: 100%;
+    background-color: ;
+}
+
+.WIMinfopeopleinvehiclesdividerline {
+    height: 90%;
+    width: .25%;
+    margin-right: .75%;
+    margin-top: 5%;
+    background-color: lightgray;
+    float: right;
+}
+
+.WIMinfopeopleinvehicles {
+    width: 50%;
+    height: 100%;
+    float: right;
+    padding-top: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    white-space: nowrap;
+}
+
+.WIMinfopeopleinvehiclespeople {
+    height: 100px;
+    width: 100%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+
+}
+
+.WIMinfopeopleinvehiclespeoplepic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    float: left;
+}
+
+.WIMinfopeopleinvehiclepeoplename {
+    line-height: 60px;
+    width: 60%;
+    font-size: 40px;
+    font-family: Arial;
+    color: black;
+    opacity: .8;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.WIMinfopeopleinvehiclepeopletitle {
+    line-height: 20px;
+    width: 60%;
+    font-size: 20px;
+    font-family: Arial;
+    color: black;
+    opacity: .5;
+    float: left;
+    margin-top: -7%;
+    margin-left: 20px;
+}
+/*WIM info extra info */
+
+.WIMinfoextrainfo {
+    height: 700px;
+    width: 100%;
+    position: absolute;
+    opacity: 10;
+}
+
+/*WIM profile page */
+
+.WIMprofilepicture {
+  width: 250px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+  height: 250;
+  margin-top: 12%;
+}
+
+.WIMprofilename {
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 50px;
+    font-family: Arial Black;
+    color: black;
+    opacity: .8;
+    margin-top: 2%;
+}
+
+.WIMprofileusername {
+    width: 100%;
+    text-align: center;
+    line-height: 0px;
+    font-size: 30px;
+    font-family: Arial;
+    color: black;
+    opacity: .6;
+    margin-top: -1.5%;
+}
+.WIMprofileinfodiv {
+    width: 100%;
+
+}
+
+.WIMprofileinforightdiv {
+    width: 50%;
+    float: right;
+    margin-top: -4%;
+}
+
+.WIMprofileinfoleftdiv {
+    width: 50%;
+    float: right;
+
+}
+
+.WIMprofileinfoboaringdiv {
+    height: 60px;
+    width: 100%;
+
+}
+
+.WIMprofileinfoboaringtitle {
+    font-size: 15px;
+    line-height: 24px;
+    font-family: Arial;
+    color: black;
+    opacity: .6;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.WIMprofileinfoboaringline {
+    width: 60%;
+    margin-left: 10px;
+    height: 1px;
+    background-color: lightgray;
+    margin-top: -12px;
+}
+
+.WIMprofileinfoboaringinfo {
+    font-size: 30px;
+    font-family: Arial;
+    color: black;
+    opacity: .6;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.WIMprofileinfoboaringwimhistorytitle {
+    text-align: center;
+    font-family: Arial;
+    color: black;
+    opacity: .7;
+    margin-bottom: 0
+}
+
+.WIMprofileinfoboaringwimhistoryscroller {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.WIMprofileinfoboaringwimhistory {
+    width: 100%;
+    height: 80px;
+    opacity: 1;
+    background-color: rgba( 79, 195, 247, 1);
+    float: left;
+    border-radius: 1vw;
+}
+
+.WIMprofileinfoboaringwimhistoryhostpicture {
+    float: left;
+    height: 70px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.WIMprofileinfoboaringwimhistorywimname {
+    float: left;
+    width: 62%;
+    line-height: 80px;
+    margin-top: 0;
+    font-size: 30px;
+    float: left;
+    font-family: Arial;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}
+
+.WIMprofileinfoboaringwimhistorywimtimesincewim {
+    float: left;
+    width: 20%;
+    line-height: 80px;
+    margin-top: 0;
+    font-size: 15px;
+    float: left;
+    font-family: Arial;
+    color: white;
+    opacity: .8;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}
+
+.WIMprofileinfoboaringwimhistorybottombar {
+    width: 90%;
+    height: 3px;
+    border-radius: 5px;
+
+    float: left;
+    margin: 0;
+    margin-left: 5%;
+}
+
+
+/*WIM info Eric Dot*/
+
+#wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: auto;
+  height: 75px;
+  width: 450px;
+  position: absolute;
+  margin: 8% 45%;
+  z-index: 1;
+}
+
+#main {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  background-color: #FF5722;
+}
+
+.circle {
+  display: none;
+  height: 75px;
+  width: 75px;
+
+  margin: auto;
+  border-radius: 50%;
+}
+
+#x1 {
+background-color: red;
+}
+
+#x2 {
+background-color: yellow;
+}
+
+#x3 {
+background-color: green;
+}
+
+
+/*notifications */
+
+.notificationsfriend {
+    height: 120px;
+    width: 100%;
+    float: left;
+}
+
+.notificationsfriendpicture {
+    height: 108px;
+    width: 108px;
+    border-radius: 50%;
+    margin: 6px;
+    float: left;
+}
+
+.notificationsfriendname {
+    line-height:100px;
+    width: 47%;
+    margin-top: 0;
+    font-family: Arial;
+    color: black;
+    opacity: .7;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-indent: 20px;
+    float: left;
+}
+
+.notificationscity {
+    float: left;
+    height: 20px;
+    margin-left: -81%;
+    margin-top: 65px;
+    font-family: Arial;
+    font-size: 15px;
+    color: black;
+    opacity: .5
+
+
+}
+
+.notificationsanswer {
+    width: 150px;
+    height: 50px;
+    margin-top: 35px;
+    margin-right: 200px;
+    background-color: #03A9F4;
+    float: left;
+    border-radius: 5px;
+    line-height: 50px;
+    font-size: 30px;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+    margin-left: 2%;
+
+}
+
+.notificationbottombar {
+    height: 3px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: lightgray;
+    float: left;
+}
+
+/*Find friends */
+
+.findfriendssearchbar {
+    height: 120px;
+    width: 100%;
+}
+
+.findfriendssearchbaricon {
+    height: 120px;
+    width: 120px;
+    float: left;
+}
+
+.findfriendssearchbartextfield {
+
+    height: 120px;
+    width: 87.4%;
+    float: left;
+    font-family: Arial;
+    font-size: 80px;
+    opacity: .8;
+    border: none;
+    min-width: 297px;
+    top: 100px;
+    position: absolute;
+}
