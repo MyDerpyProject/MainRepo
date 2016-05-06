@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0066)http://computing.southern.edu/jbeckett/cpte212w16/RosettaStone.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>VBScript/PHP Rosetta Stone</title>
+
+</head>
+
+<body>
+<h1 align="center">CPTE 212 Rosetta Stone</h1>
+<p><em>The Rosetta Stone, now on display in the British Museum in London, unlocked 
+  an ancient language because it had the same text in both a known language and 
+  an unknown language. This document is where I'll make note of some of the differences 
+  between the two environments we are using. The format is informal - sometimes 
+  I show syntax and sometimes I show examples.</em></p>
+<p align="center">Scripting Languages</p>
+<table width="100%" border="1">
+  <tbody><tr> 
+    <td width="20%">&nbsp;</td>
+    <td width="40%"><p><strong>VBScript </strong></p></td>
+    <td width="40%"><strong>PHP</strong></td>
+  </tr>
+  <tr> 
+    <td>Script tags</td>
+    <td><p><font face="Courier New, Courier, mono">&lt;%@ Language="VBScript" 
+        %&gt;<br>
+        &lt;%<br>
+        %&gt; </font></p></td>
+    <td><font face="Courier New, Courier, mono">&lt;?php<br>
+      ?&gt;</font> </td>
+  </tr>
+  <tr> 
+    <td>End of a program statement</td>
+    <td>End of a line (use _ at the end of a line to continue a statement on to 
+      the next line)</td>
+    <td>Semicolon</td>
+  </tr>
+  <tr> 
+    <td>Send information to the Web client</td>
+    <td><font face="Courier New, Courier, mono">Response.Write ( )</font></td>
+    <td><font face="Courier New, Courier, mono">print ( )</font></td>
+  </tr>
+  <tr> 
+    <td>Concatenate two strings</td>
+    <td>&amp; (Ampersand)</td>
+    <td>. (dot)</td>
+  </tr>
+  <tr> 
+    <td>Extract from a string</td>
+    <td><p>Mid(<em>string</em>,<em>start</em>[,<em>length</em>])</p>
+      <p>Note: First character of a string has an index of 1</p></td>
+    <td><p>substr(<em>string</em>,<em>start</em>[,<em>length</em>]</p>
+      <p>Note: First character of a string has an index of 0</p></td>
+  </tr>
+  <tr> 
+    <td>Variable name</td>
+    <td>Whatever you declare with Dim, but may not be a reserved word</td>
+    <td>Starts with a dollar sign</td>
+  </tr>
+  <tr> 
+    <td>Comment</td>
+    <td>Apostrophe - '</td>
+    <td>Double-slash - //</td>
+  </tr>
+  <tr> 
+    <td>Simple repeating loop</td>
+    <td><p>For <em>indexvar</em> = <em>begvalue</em> To <em>endval</em><br>
+        ...<br>
+        Next </p></td>
+    <td>for(<em>indexvar</em>; <em>endcondition</em>; <em>increment) </em>{<br>
+      ...<br>
+      } </td>
+  </tr>
+  <tr> 
+    <td><p>Loop through an entire array</p>
+      <p>Example shown: Server variables</p></td>
+    <td><pre>Dim variable
+   For Each variable In Request.ServerVariables
+   Response.Write "&lt;tr&gt;&lt;td&gt;" &amp; variable &amp; "&lt;/td&gt;"
+   Response.Write "&lt;td&gt;" &amp; _ 
+     Request.ServerVariables(variable) &amp; _
+                            "&lt;/td&gt;&lt;/tr&gt;"
+Next</pre></td>
+    <td> <pre>foreach ($_SERVER as $x =&gt; $y) {
+   print "&lt;tr&gt;&lt;td&gt;" . $x . "&lt;/td&gt;&lt;td&gt;" 
+         . $y . "&lt;/td&gt;&lt;/tr&gt;";
+} </pre></td>
+  </tr>
+  <tr> 
+    <td>Declare a function</td>
+    <td><p>Function foo(arg_1, arg_2, /* ..., */arg_n)<br>
+        retval=42 <br>
+        Response.Write("Example function.\n")<br>
+        foo= retval<br>
+        End Function</p></td>
+    <td><p>function foo($arg_1, $arg_2, /* ..., */ $arg_n)<br>
+        {<br>
+        $retval=42; <br>
+        echo "Example function.\n";<br>
+        return $retval;<br>
+        }</p></td>
+  </tr>
+  <tr> 
+    <td>If statement</td>
+    <td>If <em>condition</em> Then<br>
+      ...<br>
+      End If</td>
+    <td><p>if (<em>condition</em>) {<br>
+        ...<br>
+        } </p></td>
+  </tr>
+  <tr> 
+    <td>While statement</td>
+    <td>Do<br>
+      ...<br>
+      Loop Until <em>condition</em></td>
+    <td><p>while (<em>expression</em>) {<br>
+        ...<br>
+        } </p></td>
+  </tr>
+  <tr> 
+    <td>Include statement</td>
+    <td><p>In the HTML:</p>
+      <p>&lt;!-- #include virtual="<em>filename</em>" --&gt;</p></td>
+    <td><p>In the PHP:</p>
+      <p>include (<em>filename</em>)</p></td>
+  </tr>
+  <tr> 
+    <td>Switch</td>
+    <td><p>Select Case i<br>
+        Case 0 response.write("i equals 0")<br>
+        Case 1 response.write("i equals 1")<br>
+        Case 2 response.write("i equals 2")<br>
+        Case else response.write("Wrong i")</p></td>
+    <td>switch ($i) {<br>
+      case 0:<br>
+      echo "i equals 0";<br>
+      break;<br>
+      case 1:<br>
+      echo "i equals 1";<br>
+      break;<br>
+      case 2:<br>
+      echo "i equals 2";<br>
+      break;<br>
+      default:<br>
+      echo "Wrong i"<br>
+      }</td>
+  </tr>
+  <tr> 
+    <td>Current minute of the hour</td>
+    <td>DatePart("n",Now())</td>
+    <td>date("i")</td>
+  </tr>
+  <tr> 
+    <td>Current hour of the day (24 hours)</td>
+    <td>DatePart("h",Now())</td>
+    <td>date("H")</td>
+  </tr>
+  <tr> 
+    <td>Create an array</td>
+    <td><em>variable</em> = Array(<em>value0, value1, value2...</em>)</td>
+    <td>$<em>variable</em> = array(<em>value0, value1, value2...</em>);</td>
+  </tr>
+  <tr> 
+    <td>Address an array element</td>
+    <td><em>variable</em>(<em>index</em>)</td>
+    <td>$<em>variable</em>[<em>index</em>]</td>
+  </tr>
+  <tr> 
+    <td>Rounding</td>
+    <td><p>Round(<em>number</em>[,<em>decimalplaces</em>])</p></td>
+    <td>round(<em>number</em>[,<em>decimalplaces</em>]<em>)</em></td>
+  </tr>
+  <tr> 
+    <td>Equal test</td>
+    <td>=</td>
+    <td>==</td>
+  </tr>
+  <tr> 
+    <td>Modulus</td>
+    <td><em>x</em> Mod <em>y</em></td>
+    <td><em>x</em> % <em>y</em></td>
+  </tr>
+  <tr> 
+    <td>Square root</td>
+    <td>sqr(<em>x</em>)</td>
+    <td>sqrt(<em>x</em>)</td>
+  </tr>
+  <tr> 
+    <td>String Append</td>
+    <td><em>string</em> = <em>string</em> &amp; <em>additionalstring</em></td>
+    <td>.= operator (adding to an existing string)</td>
+  </tr>
+  <tr> 
+    <td>Escaping characters</td>
+    <td><p>Use Chr() - get the ASCII code from a chart<br>
+        e.g.: response.write(chr(34) &amp; "Hello" &amp; chr(34))<br>
+      </p></td>
+    <td> Escape characters and sequences (see chart on p. 129)<br>
+      e.g. print("\"Hello\"");</td>
+  </tr>
+  <tr> 
+    <td>Length of a string</td>
+    <td>Len()</td>
+    <td>strlen()</td>
+  </tr>
+  <tr> 
+    <td>Uppercase/Lowercase</td>
+    <td>UCase()/LCase()</td>
+    <td>strtoupper()/strtolower()</td>
+  </tr>
+  <tr> 
+    <td>Trim blanks on end of a string</td>
+    <td>Trim(),LTrim(),RTrim()</td>
+    <td>trim(),ltrim(),rtrim()</td>
+  </tr>
+  <tr> 
+    <td>Change part of a string</td>
+    <td>Replace()</td>
+    <td> str_replace(), str_ireplace(), substr_replace()</td>
+  </tr>
+  <tr> 
+    <td>Break down a string based on a delimiter</td>
+    <td>Split()</td>
+    <td>str_split(),explode(),implode()</td>
+  </tr>
+  <tr> 
+    <td>Read data from a Web site</td>
+    <td><p>' Sample code</p>
+      <p>url = "http://hw.cs.southern.edu/Bible/b23_1_1.htm"<br>
+        Set xmlhttp = _<br>
+        CreateObject("MSXML2.ServerXMLHTTP")<br>
+        xmlhttp.open "GET", url, 0<br>
+        xmlhttp.send ""<br>
+        response.write xmlhttp.responseText<br>
+        Set xmlhttp = Nothing</p></td>
+    <td><p>$<em>variable</em> = file(<em>url</em>)</p>
+      <p>Note: This gives you an array of strings. For HW05 you only need the 
+        first time. Hence:</p>
+      <p>print ($<em>variable</em>[0]);</p></td>
+  </tr>
+  <tr> 
+    <td>Print all values in the POST array</td>
+    <td><font face="Courier New, Courier, mono">Values in form:&lt;br /&gt;&lt;table 
+      border="1"&gt;<br>
+      &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;<br>
+      &lt;%<br>
+      For Each Item In Request.Form<br>
+      fieldName = Item<br>
+      fieldValue = Request.Form(Item)<br>
+      Response.write("&lt;tr&gt;&lt;td&gt;" &amp; fieldName &amp; "&lt;/td&gt;&lt;td&gt;" 
+      &amp; fieldValue &amp; "&lt;/td&gt;&lt;/tr&gt;")<br>
+      Next</font></td>
+    <td><p><font face="Courier New, Courier, mono">print "&lt;pre&gt;";<br>
+        print_r($_POST);<br>
+        print "&lt;/pre&gt;";</font></p>
+      <p>This method can be easily used to print any array.</p></td>
+  </tr>
+  <tr> 
+    <td><p>&nbsp;</p>
+      <p>Quit, giving user a message</p></td>
+    <td>Use logic to get to the end of your program</td>
+    <td>die("anything you want to tell the user")</td>
+  </tr>
+  <tr> 
+    <td>Finding client IP address</td>
+    <td>Response.Write Request.ServerVariables("REMOTE_ADDR")</td>
+    <td>print ($_SERVER['REMOTE_ADDR']);</td>
+  </tr>
+  <tr> 
+    <td>Finding server address</td>
+    <td>Response.Write Request.ServerVariables("LOCAL_ADDR")</td>
+    <td>print ($_SERVER['SERVER_ADDR']);</td>
+  </tr>
+  <tr> 
+    <td>Read from a text file</td>
+    <td> Dim fso, f, filespec <p> Set fso = CreateObject("Scripting.FileSystemObject")<br>
+        filespec = Server.Mappath("/tutorials/asp/unitednations.txt")</p>
+      <p> Set f = fso.OpenTextFile (filespec,1)</p>
+      <p> ' Read line by line until end of file</p>
+      <p> Do While Not f.AtEndOfStream <br>
+        Response.write f.ReadLine &amp; "&lt;br /&gt;" <br>
+        Loop </p>
+      <p> f.Close</p></td>
+    <td><p>// Read the file into an array</p>
+      <p>$filecontents = file("filename")</p></td>
+  </tr>
+  <tr>
+    <td>Current page's URL</td>
+    <td>"http://" &amp; Request.ServerVariables("SERVER_NAME") 
+      &amp; Request.ServerVariables("URL") &amp; "?" &amp; 
+      Request.Querystring</td>
+    <td>$_SERVER['PHP_SELF'</td>
+  </tr>
+</tbody></table>
+<p align="center">Operating Systems</p>
+<table width="100%" border="1">
+  <tbody><tr> 
+    <td width="20%">&nbsp;</td>
+    <td width="40%"><strong>Windows</strong></td>
+    <td width="40%"><strong>Linux </strong>(Some of these work in command line 
+      mode in Windows)</td>
+  </tr>
+  <tr> 
+    <td>Change directory</td>
+    <td>Click on the directory</td>
+    <td>cd <em>directory</em></td>
+  </tr>
+  <tr> 
+    <td>Make directory</td>
+    <td>Right-click, "New...Folder"</td>
+    <td>mkdir <em>directory</em></td>
+  </tr>
+  <tr> 
+    <td>Directory separator</td>
+    <td><div align="center"><strong>\</strong></div></td>
+    <td><div align="center"><strong>/</strong></div></td>
+  </tr>
+  <tr> 
+    <td>List of files</td>
+    <td>Click on a directory and look</td>
+    <td>ls -al</td>
+  </tr>
+  <tr> 
+    <td>Make a file</td>
+    <td>Use a program such as Notepad++</td>
+    <td>nano <em>filename</em></td>
+  </tr>
+  <tr> 
+    <td>Complete a command</td>
+    <td>&nbsp;</td>
+    <td>Tab</td>
+  </tr>
+  <tr> 
+    <td>Obtaining the name of this script for use in the &lt;form action</td>
+    <td><p>Request.ServerVariables("SCRIPT_NAME") &amp; "'") 
+        <br>
+      </p></td>
+    <td><p>$_SERVER['SCRIPT_NAME']</p></td>
+  </tr>
+  <tr> 
+    <td>Obtaining a variable from the GET array</td>
+    <td><p>Request.QueryString("uname")</p></td>
+    <td>$_GET['uname']</td>
+  </tr>
+  <tr>
+    <td>Obtaining a variable from the POST array</td>
+    <td>Request.Form("uname")</td>
+    <td>$_POST['uname']</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+</body></html>
